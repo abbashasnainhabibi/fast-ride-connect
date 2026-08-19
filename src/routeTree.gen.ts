@@ -24,6 +24,7 @@ import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminActivityRouteImport } from './routes/admin/activity'
 import { Route as AdminReportsRouteImport } from './routes/admin/reports'
+import { Route as AdminSuspendedRouteImport } from './routes/admin/suspended'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as MatchesMatchIdRouteImport } from './routes/matches.$matchId'
 import { Route as TimetableReviewRouteImport } from './routes/timetable.review'
@@ -104,6 +105,11 @@ const AdminReportsRoute = AdminReportsRouteImport.update({
   path: '/admin/reports',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSuspendedRoute = AdminSuspendedRouteImport.update({
+  id: '/admin/suspended',
+  path: '/admin/suspended',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
   id: '/admin/users',
   path: '/admin/users',
@@ -140,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/verify': typeof VerifyRoute
   '/admin/activity': typeof AdminActivityRoute
   '/admin/reports': typeof AdminReportsRoute
+  '/admin/suspended': typeof AdminSuspendedRoute
   '/admin/users': typeof AdminUsersRoute
   '/matches/$matchId': typeof MatchesMatchIdRoute
   '/timetable/review': typeof TimetableReviewRoute
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/verify': typeof VerifyRoute
   '/admin/activity': typeof AdminActivityRoute
   '/admin/reports': typeof AdminReportsRoute
+  '/admin/suspended': typeof AdminSuspendedRoute
   '/admin/users': typeof AdminUsersRoute
   '/matches/$matchId': typeof MatchesMatchIdRoute
   '/timetable/review': typeof TimetableReviewRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/verify': typeof VerifyRoute
   '/admin/activity': typeof AdminActivityRoute
   '/admin/reports': typeof AdminReportsRoute
+  '/admin/suspended': typeof AdminSuspendedRoute
   '/admin/users': typeof AdminUsersRoute
   '/matches/$matchId': typeof MatchesMatchIdRoute
   '/timetable/review': typeof TimetableReviewRoute
@@ -206,6 +215,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/admin/activity'
     | '/admin/reports'
+    | '/admin/suspended'
     | '/admin/users'
     | '/matches/$matchId'
     | '/timetable/review'
@@ -227,6 +237,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/admin/activity'
     | '/admin/reports'
+    | '/admin/suspended'
     | '/admin/users'
     | '/matches/$matchId'
     | '/timetable/review'
@@ -248,6 +259,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/admin/activity'
     | '/admin/reports'
+    | '/admin/suspended'
     | '/admin/users'
     | '/matches/$matchId'
     | '/timetable/review'
@@ -270,6 +282,7 @@ export interface RootRouteChildren {
   VerifyRoute: typeof VerifyRoute
   AdminActivityRoute: typeof AdminActivityRoute
   AdminReportsRoute: typeof AdminReportsRoute
+  AdminSuspendedRoute: typeof AdminSuspendedRoute
   AdminUsersRoute: typeof AdminUsersRoute
   MatchesMatchIdRoute: typeof MatchesMatchIdRoute
   TimetableReviewRoute: typeof TimetableReviewRoute
@@ -384,6 +397,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminReportsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/suspended': {
+      id: '/admin/suspended'
+      path: '/admin/suspended'
+      fullPath: '/admin/suspended'
+      preLoaderRoute: typeof AdminSuspendedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/users': {
       id: '/admin/users'
       path: '/admin/users'
@@ -430,6 +450,7 @@ const rootRouteChildren: RootRouteChildren = {
   VerifyRoute: VerifyRoute,
   AdminActivityRoute: AdminActivityRoute,
   AdminReportsRoute: AdminReportsRoute,
+  AdminSuspendedRoute: AdminSuspendedRoute,
   AdminUsersRoute: AdminUsersRoute,
   MatchesMatchIdRoute: MatchesMatchIdRoute,
   TimetableReviewRoute: TimetableReviewRoute,
