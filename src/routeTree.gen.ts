@@ -22,6 +22,7 @@ import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminReportsRouteImport } from './routes/admin/reports'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as MatchesMatchIdRouteImport } from './routes/matches.$matchId'
 import { Route as TimetableReviewRouteImport } from './routes/timetable.review'
@@ -92,6 +93,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminReportsRoute = AdminReportsRouteImport.update({
+  id: '/admin/reports',
+  path: '/admin/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
   id: '/admin/users',
   path: '/admin/users',
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/admin/reports': typeof AdminReportsRoute
   '/admin/users': typeof AdminUsersRoute
   '/matches/$matchId': typeof MatchesMatchIdRoute
   '/timetable/review': typeof TimetableReviewRoute
@@ -145,6 +152,7 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/admin/reports': typeof AdminReportsRoute
   '/admin/users': typeof AdminUsersRoute
   '/matches/$matchId': typeof MatchesMatchIdRoute
   '/timetable/review': typeof TimetableReviewRoute
@@ -165,6 +173,7 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/admin/reports': typeof AdminReportsRoute
   '/admin/users': typeof AdminUsersRoute
   '/matches/$matchId': typeof MatchesMatchIdRoute
   '/timetable/review': typeof TimetableReviewRoute
@@ -186,6 +195,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/verify'
+    | '/admin/reports'
     | '/admin/users'
     | '/matches/$matchId'
     | '/timetable/review'
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/verify'
+    | '/admin/reports'
     | '/admin/users'
     | '/matches/$matchId'
     | '/timetable/review'
@@ -224,6 +235,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/verify'
+    | '/admin/reports'
     | '/admin/users'
     | '/matches/$matchId'
     | '/timetable/review'
@@ -244,6 +256,7 @@ export interface RootRouteChildren {
   SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
   VerifyRoute: typeof VerifyRoute
+  AdminReportsRoute: typeof AdminReportsRoute
   AdminUsersRoute: typeof AdminUsersRoute
   MatchesMatchIdRoute: typeof MatchesMatchIdRoute
   TimetableReviewRoute: typeof TimetableReviewRoute
@@ -344,6 +357,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/reports': {
+      id: '/admin/reports'
+      path: '/admin/reports'
+      fullPath: '/admin/reports'
+      preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/users': {
       id: '/admin/users'
       path: '/admin/users'
@@ -388,6 +408,7 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
   VerifyRoute: VerifyRoute,
+  AdminReportsRoute: AdminReportsRoute,
   AdminUsersRoute: AdminUsersRoute,
   MatchesMatchIdRoute: MatchesMatchIdRoute,
   TimetableReviewRoute: TimetableReviewRoute,
