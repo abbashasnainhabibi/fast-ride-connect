@@ -10,15 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as TimetableReviewRouteImport } from './routes/timetable.review'
 import { Route as TimetableUploadRouteImport } from './routes/timetable.upload'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -41,6 +48,11 @@ const VerifyRoute = VerifyRouteImport.update({
   path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TimetableReviewRoute = TimetableReviewRouteImport.update({
+  id: '/timetable/review',
+  path: '/timetable/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TimetableUploadRoute = TimetableUploadRouteImport.update({
   id: '/timetable/upload',
   path: '/timetable/upload',
@@ -49,52 +61,76 @@ const TimetableUploadRoute = TimetableUploadRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/timetable/review': typeof TimetableReviewRoute
   '/timetable/upload': typeof TimetableUploadRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/timetable/review': typeof TimetableReviewRoute
   '/timetable/upload': typeof TimetableUploadRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/timetable/review': typeof TimetableReviewRoute
   '/timetable/upload': typeof TimetableUploadRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/login' | '/onboarding' | '/signup' | '/verify' | '/timetable/upload'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    '/' | '/login' | '/onboarding' | '/signup' | '/verify' | '/timetable/upload'
-  id:
-    | '__root__'
     | '/'
+    | '/dashboard'
     | '/login'
     | '/onboarding'
     | '/signup'
     | '/verify'
+    | '/timetable/review'
+    | '/timetable/upload'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/onboarding'
+    | '/signup'
+    | '/verify'
+    | '/timetable/review'
+    | '/timetable/upload'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/onboarding'
+    | '/signup'
+    | '/verify'
+    | '/timetable/review'
     | '/timetable/upload'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
   LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
   SignupRoute: typeof SignupRoute
   VerifyRoute: typeof VerifyRoute
+  TimetableReviewRoute: typeof TimetableReviewRoute
   TimetableUploadRoute: typeof TimetableUploadRoute
 }
 
@@ -105,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -135,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/timetable/review': {
+      id: '/timetable/review'
+      path: '/timetable/review'
+      fullPath: '/timetable/review'
+      preLoaderRoute: typeof TimetableReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/timetable/upload': {
       id: '/timetable/upload'
       path: '/timetable/upload'
@@ -147,10 +197,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
   SignupRoute: SignupRoute,
   VerifyRoute: VerifyRoute,
+  TimetableReviewRoute: TimetableReviewRoute,
   TimetableUploadRoute: TimetableUploadRoute,
 }
 export const routeTree = rootRouteImport
