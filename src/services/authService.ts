@@ -8,6 +8,12 @@ export interface SignupInput {
 
 const FAST_DOMAINS = ["nu.edu.pk", "khi.nu.edu.pk"];
 
+/** Frontend-only demo credentials (no database yet). */
+export const DEMO_CREDENTIALS = {
+  student: { email: "k214512@nu.edu.pk", password: "carpool123" },
+  admin: { email: "moderation@nu.edu.pk", password: "admin123" },
+} as const;
+
 export const authService = {
   isFastEmail(email: string) {
     const domain = email.split("@")[1]?.toLowerCase() ?? "";
