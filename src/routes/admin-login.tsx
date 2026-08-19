@@ -5,7 +5,7 @@ import { PublicLayout } from "@/layouts/PublicLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { authService } from "@/services/authService";
+import { DEMO_CREDENTIALS, authService } from "@/services/authService";
 
 export const Route = createFileRoute("/admin-login")({
   head: () => ({
