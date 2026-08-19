@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminLoginRouteImport } from './routes/admin-login'
 import { Route as ConnectionsRouteImport } from './routes/connections'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as LoginRouteImport } from './routes/login'
@@ -27,6 +28,11 @@ import { Route as TimetableUploadRouteImport } from './routes/timetable.upload'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin-login',
+  path: '/admin-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConnectionsRoute = ConnectionsRouteImport.update({
@@ -97,6 +103,7 @@ const TimetableUploadRoute = TimetableUploadRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin-login': typeof AdminLoginRoute
   '/connections': typeof ConnectionsRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin-login': typeof AdminLoginRoute
   '/connections': typeof ConnectionsRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
@@ -130,6 +138,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin-login': typeof AdminLoginRoute
   '/connections': typeof ConnectionsRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
@@ -148,6 +157,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin-login'
     | '/connections'
     | '/dashboard'
     | '/login'
@@ -164,6 +174,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin-login'
     | '/connections'
     | '/dashboard'
     | '/login'
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin-login'
     | '/connections'
     | '/dashboard'
     | '/login'
@@ -197,6 +209,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   ConnectionsRoute: typeof ConnectionsRoute
   DashboardRoute: typeof DashboardRoute
   LoginRoute: typeof LoginRoute
@@ -219,6 +232,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin-login': {
+      id: '/admin-login'
+      path: '/admin-login'
+      fullPath: '/admin-login'
+      preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/connections': {
@@ -317,6 +337,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminLoginRoute: AdminLoginRoute,
   ConnectionsRoute: ConnectionsRoute,
   DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
