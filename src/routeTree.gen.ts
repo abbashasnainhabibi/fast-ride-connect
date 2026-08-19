@@ -23,6 +23,7 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminActivityRouteImport } from './routes/admin/activity'
+import { Route as AdminProfileRouteImport } from './routes/admin/profile'
 import { Route as AdminReportsRouteImport } from './routes/admin/reports'
 import { Route as AdminSuspendedRouteImport } from './routes/admin/suspended'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
@@ -100,6 +101,11 @@ const AdminActivityRoute = AdminActivityRouteImport.update({
   path: '/admin/activity',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminProfileRoute = AdminProfileRouteImport.update({
+  id: '/admin/profile',
+  path: '/admin/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminReportsRoute = AdminReportsRouteImport.update({
   id: '/admin/reports',
   path: '/admin/reports',
@@ -145,6 +151,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/admin/activity': typeof AdminActivityRoute
+  '/admin/profile': typeof AdminProfileRoute
   '/admin/reports': typeof AdminReportsRoute
   '/admin/suspended': typeof AdminSuspendedRoute
   '/admin/users': typeof AdminUsersRoute
@@ -167,6 +174,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/admin/activity': typeof AdminActivityRoute
+  '/admin/profile': typeof AdminProfileRoute
   '/admin/reports': typeof AdminReportsRoute
   '/admin/suspended': typeof AdminSuspendedRoute
   '/admin/users': typeof AdminUsersRoute
@@ -190,6 +198,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/admin/activity': typeof AdminActivityRoute
+  '/admin/profile': typeof AdminProfileRoute
   '/admin/reports': typeof AdminReportsRoute
   '/admin/suspended': typeof AdminSuspendedRoute
   '/admin/users': typeof AdminUsersRoute
@@ -214,6 +223,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify'
     | '/admin/activity'
+    | '/admin/profile'
     | '/admin/reports'
     | '/admin/suspended'
     | '/admin/users'
@@ -236,6 +246,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify'
     | '/admin/activity'
+    | '/admin/profile'
     | '/admin/reports'
     | '/admin/suspended'
     | '/admin/users'
@@ -258,6 +269,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify'
     | '/admin/activity'
+    | '/admin/profile'
     | '/admin/reports'
     | '/admin/suspended'
     | '/admin/users'
@@ -281,6 +293,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   VerifyRoute: typeof VerifyRoute
   AdminActivityRoute: typeof AdminActivityRoute
+  AdminProfileRoute: typeof AdminProfileRoute
   AdminReportsRoute: typeof AdminReportsRoute
   AdminSuspendedRoute: typeof AdminSuspendedRoute
   AdminUsersRoute: typeof AdminUsersRoute
@@ -390,6 +403,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminActivityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/profile': {
+      id: '/admin/profile'
+      path: '/admin/profile'
+      fullPath: '/admin/profile'
+      preLoaderRoute: typeof AdminProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/reports': {
       id: '/admin/reports'
       path: '/admin/reports'
@@ -449,6 +469,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   VerifyRoute: VerifyRoute,
   AdminActivityRoute: AdminActivityRoute,
+  AdminProfileRoute: AdminProfileRoute,
   AdminReportsRoute: AdminReportsRoute,
   AdminSuspendedRoute: AdminSuspendedRoute,
   AdminUsersRoute: AdminUsersRoute,
