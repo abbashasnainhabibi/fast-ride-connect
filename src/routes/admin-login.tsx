@@ -71,7 +71,7 @@ function AdminLoginPage() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <p className="mt-1 text-xs text-muted-foreground">
-              Prototype: any password with 6+ characters works.
+              Demo admin: {DEMO_CREDENTIALS.admin.email} / {DEMO_CREDENTIALS.admin.password}
             </p>
           </div>
           {error ? (
