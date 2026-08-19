@@ -70,7 +70,7 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <p className="mt-1 text-xs text-muted-foreground">
-              Prototype: any password with 6+ characters works.
+              Demo login: {DEMO_CREDENTIALS.student.email} / {DEMO_CREDENTIALS.student.password}
             </p>
           </div>
           {error ? (
