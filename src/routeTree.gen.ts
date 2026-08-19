@@ -10,15 +10,45 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminLoginRouteImport } from './routes/admin-login'
+import { Route as ConnectionsRouteImport } from './routes/connections'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as RequestsRouteImport } from './routes/requests'
+import { Route as ScheduleRouteImport } from './routes/schedule'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminActivityRouteImport } from './routes/admin/activity'
+import { Route as AdminProfileRouteImport } from './routes/admin/profile'
+import { Route as AdminReportsRouteImport } from './routes/admin/reports'
+import { Route as AdminSuspendedRouteImport } from './routes/admin/suspended'
+import { Route as AdminUsersRouteImport } from './routes/admin/users'
+import { Route as MatchesMatchIdRouteImport } from './routes/matches.$matchId'
+import { Route as TimetableReviewRouteImport } from './routes/timetable.review'
 import { Route as TimetableUploadRouteImport } from './routes/timetable.upload'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin-login',
+  path: '/admin-login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnectionsRoute = ConnectionsRouteImport.update({
+  id: '/connections',
+  path: '/connections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -31,6 +61,26 @@ const OnboardingRoute = OnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestsRoute = RequestsRouteImport.update({
+  id: '/requests',
+  path: '/requests',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScheduleRoute = ScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
@@ -41,6 +91,46 @@ const VerifyRoute = VerifyRouteImport.update({
   path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminActivityRoute = AdminActivityRouteImport.update({
+  id: '/admin/activity',
+  path: '/admin/activity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminProfileRoute = AdminProfileRouteImport.update({
+  id: '/admin/profile',
+  path: '/admin/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminReportsRoute = AdminReportsRouteImport.update({
+  id: '/admin/reports',
+  path: '/admin/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSuspendedRoute = AdminSuspendedRouteImport.update({
+  id: '/admin/suspended',
+  path: '/admin/suspended',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/admin/users',
+  path: '/admin/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MatchesMatchIdRoute = MatchesMatchIdRouteImport.update({
+  id: '/matches/$matchId',
+  path: '/matches/$matchId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimetableReviewRoute = TimetableReviewRouteImport.update({
+  id: '/timetable/review',
+  path: '/timetable/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TimetableUploadRoute = TimetableUploadRouteImport.update({
   id: '/timetable/upload',
   path: '/timetable/upload',
@@ -49,53 +139,168 @@ const TimetableUploadRoute = TimetableUploadRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin-login': typeof AdminLoginRoute
+  '/connections': typeof ConnectionsRoute
+  '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/profile': typeof ProfileRoute
+  '/requests': typeof RequestsRoute
+  '/schedule': typeof ScheduleRoute
+  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/admin/activity': typeof AdminActivityRoute
+  '/admin/profile': typeof AdminProfileRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/suspended': typeof AdminSuspendedRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/matches/$matchId': typeof MatchesMatchIdRoute
+  '/timetable/review': typeof TimetableReviewRoute
   '/timetable/upload': typeof TimetableUploadRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin-login': typeof AdminLoginRoute
+  '/connections': typeof ConnectionsRoute
+  '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/profile': typeof ProfileRoute
+  '/requests': typeof RequestsRoute
+  '/schedule': typeof ScheduleRoute
+  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/admin/activity': typeof AdminActivityRoute
+  '/admin/profile': typeof AdminProfileRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/suspended': typeof AdminSuspendedRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/matches/$matchId': typeof MatchesMatchIdRoute
+  '/timetable/review': typeof TimetableReviewRoute
   '/timetable/upload': typeof TimetableUploadRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin-login': typeof AdminLoginRoute
+  '/connections': typeof ConnectionsRoute
+  '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/profile': typeof ProfileRoute
+  '/requests': typeof RequestsRoute
+  '/schedule': typeof ScheduleRoute
+  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/admin/activity': typeof AdminActivityRoute
+  '/admin/profile': typeof AdminProfileRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/suspended': typeof AdminSuspendedRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/matches/$matchId': typeof MatchesMatchIdRoute
+  '/timetable/review': typeof TimetableReviewRoute
   '/timetable/upload': typeof TimetableUploadRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/login' | '/onboarding' | '/signup' | '/verify' | '/timetable/upload'
+    | '/'
+    | '/admin-login'
+    | '/connections'
+    | '/dashboard'
+    | '/login'
+    | '/onboarding'
+    | '/profile'
+    | '/requests'
+    | '/schedule'
+    | '/settings'
+    | '/signup'
+    | '/verify'
+    | '/admin/activity'
+    | '/admin/profile'
+    | '/admin/reports'
+    | '/admin/suspended'
+    | '/admin/users'
+    | '/matches/$matchId'
+    | '/timetable/review'
+    | '/timetable/upload'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/login' | '/onboarding' | '/signup' | '/verify' | '/timetable/upload'
+    | '/'
+    | '/admin-login'
+    | '/connections'
+    | '/dashboard'
+    | '/login'
+    | '/onboarding'
+    | '/profile'
+    | '/requests'
+    | '/schedule'
+    | '/settings'
+    | '/signup'
+    | '/verify'
+    | '/admin/activity'
+    | '/admin/profile'
+    | '/admin/reports'
+    | '/admin/suspended'
+    | '/admin/users'
+    | '/matches/$matchId'
+    | '/timetable/review'
+    | '/timetable/upload'
+    | '/admin'
   id:
     | '__root__'
     | '/'
+    | '/admin-login'
+    | '/connections'
+    | '/dashboard'
     | '/login'
     | '/onboarding'
+    | '/profile'
+    | '/requests'
+    | '/schedule'
+    | '/settings'
     | '/signup'
     | '/verify'
+    | '/admin/activity'
+    | '/admin/profile'
+    | '/admin/reports'
+    | '/admin/suspended'
+    | '/admin/users'
+    | '/matches/$matchId'
+    | '/timetable/review'
     | '/timetable/upload'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  ConnectionsRoute: typeof ConnectionsRoute
+  DashboardRoute: typeof DashboardRoute
   LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
+  ProfileRoute: typeof ProfileRoute
+  RequestsRoute: typeof RequestsRoute
+  ScheduleRoute: typeof ScheduleRoute
+  SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
   VerifyRoute: typeof VerifyRoute
+  AdminActivityRoute: typeof AdminActivityRoute
+  AdminProfileRoute: typeof AdminProfileRoute
+  AdminReportsRoute: typeof AdminReportsRoute
+  AdminSuspendedRoute: typeof AdminSuspendedRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  MatchesMatchIdRoute: typeof MatchesMatchIdRoute
+  TimetableReviewRoute: typeof TimetableReviewRoute
   TimetableUploadRoute: typeof TimetableUploadRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -105,6 +310,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin-login': {
+      id: '/admin-login'
+      path: '/admin-login'
+      fullPath: '/admin-login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connections': {
+      id: '/connections'
+      path: '/connections'
+      fullPath: '/connections'
+      preLoaderRoute: typeof ConnectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -121,6 +347,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/requests': {
+      id: '/requests'
+      path: '/requests'
+      fullPath: '/requests'
+      preLoaderRoute: typeof RequestsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schedule': {
+      id: '/schedule'
+      path: '/schedule'
+      fullPath: '/schedule'
+      preLoaderRoute: typeof ScheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -135,6 +389,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/activity': {
+      id: '/admin/activity'
+      path: '/admin/activity'
+      fullPath: '/admin/activity'
+      preLoaderRoute: typeof AdminActivityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/profile': {
+      id: '/admin/profile'
+      path: '/admin/profile'
+      fullPath: '/admin/profile'
+      preLoaderRoute: typeof AdminProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/reports': {
+      id: '/admin/reports'
+      path: '/admin/reports'
+      fullPath: '/admin/reports'
+      preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/suspended': {
+      id: '/admin/suspended'
+      path: '/admin/suspended'
+      fullPath: '/admin/suspended'
+      preLoaderRoute: typeof AdminSuspendedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/matches/$matchId': {
+      id: '/matches/$matchId'
+      path: '/matches/$matchId'
+      fullPath: '/matches/$matchId'
+      preLoaderRoute: typeof MatchesMatchIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/timetable/review': {
+      id: '/timetable/review'
+      path: '/timetable/review'
+      fullPath: '/timetable/review'
+      preLoaderRoute: typeof TimetableReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/timetable/upload': {
       id: '/timetable/upload'
       path: '/timetable/upload'
@@ -147,11 +457,26 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  ConnectionsRoute: ConnectionsRoute,
+  DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
+  ProfileRoute: ProfileRoute,
+  RequestsRoute: RequestsRoute,
+  ScheduleRoute: ScheduleRoute,
+  SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
   VerifyRoute: VerifyRoute,
+  AdminActivityRoute: AdminActivityRoute,
+  AdminProfileRoute: AdminProfileRoute,
+  AdminReportsRoute: AdminReportsRoute,
+  AdminSuspendedRoute: AdminSuspendedRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  MatchesMatchIdRoute: MatchesMatchIdRoute,
+  TimetableReviewRoute: TimetableReviewRoute,
   TimetableUploadRoute: TimetableUploadRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
