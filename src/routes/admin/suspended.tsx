@@ -17,7 +17,7 @@ export const Route = createFileRoute("/admin/suspended")({
       { property: "og:description", content: "Accounts currently removed from matching on FAST Carpool." },
     ],
   }),
-  component: AdminSuspended;
+  component: AdminSuspended,
 });
 
 function AdminSuspended() {
