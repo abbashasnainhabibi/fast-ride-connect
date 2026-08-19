@@ -15,6 +15,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as RequestsRouteImport } from './routes/requests'
+import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as MatchesMatchIdRouteImport } from './routes/matches.$matchId'
@@ -51,6 +52,11 @@ const RequestsRoute = RequestsRouteImport.update({
   path: '/requests',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScheduleRoute = ScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
   '/requests': typeof RequestsRoute
+  '/schedule': typeof ScheduleRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/matches/$matchId': typeof MatchesMatchIdRoute
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
   '/requests': typeof RequestsRoute
+  '/schedule': typeof ScheduleRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/matches/$matchId': typeof MatchesMatchIdRoute
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
   '/requests': typeof RequestsRoute
+  '/schedule': typeof ScheduleRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/matches/$matchId': typeof MatchesMatchIdRoute
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/onboarding'
     | '/requests'
+    | '/schedule'
     | '/signup'
     | '/verify'
     | '/matches/$matchId'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/onboarding'
     | '/requests'
+    | '/schedule'
     | '/signup'
     | '/verify'
     | '/matches/$matchId'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/onboarding'
     | '/requests'
+    | '/schedule'
     | '/signup'
     | '/verify'
     | '/matches/$matchId'
@@ -166,6 +178,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
   RequestsRoute: typeof RequestsRoute
+  ScheduleRoute: typeof ScheduleRoute
   SignupRoute: typeof SignupRoute
   VerifyRoute: typeof VerifyRoute
   MatchesMatchIdRoute: typeof MatchesMatchIdRoute
@@ -217,6 +230,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RequestsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/schedule': {
+      id: '/schedule'
+      path: '/schedule'
+      fullPath: '/schedule'
+      preLoaderRoute: typeof ScheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signup': {
       id: '/signup'
       path: '/signup'
@@ -262,6 +282,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
   RequestsRoute: RequestsRoute,
+  ScheduleRoute: ScheduleRoute,
   SignupRoute: SignupRoute,
   VerifyRoute: VerifyRoute,
   MatchesMatchIdRoute: MatchesMatchIdRoute,
