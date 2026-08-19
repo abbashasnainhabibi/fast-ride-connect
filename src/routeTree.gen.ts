@@ -22,6 +22,7 @@ import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as MatchesMatchIdRouteImport } from './routes/matches.$matchId'
 import { Route as TimetableReviewRouteImport } from './routes/timetable.review'
 import { Route as TimetableUploadRouteImport } from './routes/timetable.upload'
@@ -91,6 +92,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/admin/users',
+  path: '/admin/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MatchesMatchIdRoute = MatchesMatchIdRouteImport.update({
   id: '/matches/$matchId',
   path: '/matches/$matchId',
@@ -120,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/admin/users': typeof AdminUsersRoute
   '/matches/$matchId': typeof MatchesMatchIdRoute
   '/timetable/review': typeof TimetableReviewRoute
   '/timetable/upload': typeof TimetableUploadRoute
@@ -138,6 +145,7 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/admin/users': typeof AdminUsersRoute
   '/matches/$matchId': typeof MatchesMatchIdRoute
   '/timetable/review': typeof TimetableReviewRoute
   '/timetable/upload': typeof TimetableUploadRoute
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/admin/users': typeof AdminUsersRoute
   '/matches/$matchId': typeof MatchesMatchIdRoute
   '/timetable/review': typeof TimetableReviewRoute
   '/timetable/upload': typeof TimetableUploadRoute
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/verify'
+    | '/admin/users'
     | '/matches/$matchId'
     | '/timetable/review'
     | '/timetable/upload'
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/verify'
+    | '/admin/users'
     | '/matches/$matchId'
     | '/timetable/review'
     | '/timetable/upload'
@@ -213,6 +224,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/verify'
+    | '/admin/users'
     | '/matches/$matchId'
     | '/timetable/review'
     | '/timetable/upload'
@@ -232,6 +244,7 @@ export interface RootRouteChildren {
   SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
   VerifyRoute: typeof VerifyRoute
+  AdminUsersRoute: typeof AdminUsersRoute
   MatchesMatchIdRoute: typeof MatchesMatchIdRoute
   TimetableReviewRoute: typeof TimetableReviewRoute
   TimetableUploadRoute: typeof TimetableUploadRoute
@@ -331,6 +344,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/matches/$matchId': {
       id: '/matches/$matchId'
       path: '/matches/$matchId'
@@ -368,6 +388,7 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
   VerifyRoute: VerifyRoute,
+  AdminUsersRoute: AdminUsersRoute,
   MatchesMatchIdRoute: MatchesMatchIdRoute,
   TimetableReviewRoute: TimetableReviewRoute,
   TimetableUploadRoute: TimetableUploadRoute,
