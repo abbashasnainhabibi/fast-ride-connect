@@ -15,6 +15,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as MatchesMatchIdRouteImport } from './routes/matches.$matchId'
 import { Route as TimetableReviewRouteImport } from './routes/timetable.review'
 import { Route as TimetableUploadRouteImport } from './routes/timetable.upload'
 
@@ -48,6 +49,11 @@ const VerifyRoute = VerifyRouteImport.update({
   path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MatchesMatchIdRoute = MatchesMatchIdRouteImport.update({
+  id: '/matches/$matchId',
+  path: '/matches/$matchId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TimetableReviewRoute = TimetableReviewRouteImport.update({
   id: '/timetable/review',
   path: '/timetable/review',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/matches/$matchId': typeof MatchesMatchIdRoute
   '/timetable/review': typeof TimetableReviewRoute
   '/timetable/upload': typeof TimetableUploadRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/matches/$matchId': typeof MatchesMatchIdRoute
   '/timetable/review': typeof TimetableReviewRoute
   '/timetable/upload': typeof TimetableUploadRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
+  '/matches/$matchId': typeof MatchesMatchIdRoute
   '/timetable/review': typeof TimetableReviewRoute
   '/timetable/upload': typeof TimetableUploadRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/signup'
     | '/verify'
+    | '/matches/$matchId'
     | '/timetable/review'
     | '/timetable/upload'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/signup'
     | '/verify'
+    | '/matches/$matchId'
     | '/timetable/review'
     | '/timetable/upload'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/signup'
     | '/verify'
+    | '/matches/$matchId'
     | '/timetable/review'
     | '/timetable/upload'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   SignupRoute: typeof SignupRoute
   VerifyRoute: typeof VerifyRoute
+  MatchesMatchIdRoute: typeof MatchesMatchIdRoute
   TimetableReviewRoute: typeof TimetableReviewRoute
   TimetableUploadRoute: typeof TimetableUploadRoute
 }
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/matches/$matchId': {
+      id: '/matches/$matchId'
+      path: '/matches/$matchId'
+      fullPath: '/matches/$matchId'
+      preLoaderRoute: typeof MatchesMatchIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/timetable/review': {
       id: '/timetable/review'
       path: '/timetable/review'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   SignupRoute: SignupRoute,
   VerifyRoute: VerifyRoute,
+  MatchesMatchIdRoute: MatchesMatchIdRoute,
   TimetableReviewRoute: TimetableReviewRoute,
   TimetableUploadRoute: TimetableUploadRoute,
 }
