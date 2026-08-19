@@ -8,6 +8,12 @@ export interface SignupInput {
 
 const FAST_DOMAINS = ["nu.edu.pk", "khi.nu.edu.pk"];
 
+/** Frontend-only demo credentials (no database yet). */
+export const DEMO_CREDENTIALS = {
+  student: { email: "k214512@nu.edu.pk", password: "carpool123" },
+  admin: { email: "moderation@nu.edu.pk", password: "admin123" },
+} as const;
+
 export const authService = {
   isFastEmail(email: string) {
     const domain = email.split("@")[1]?.toLowerCase() ?? "";
@@ -25,18 +31,30 @@ export const authService = {
   },
 
   async login(email: string, password: string): Promise<Session> {
-    if (!email || password.length < 6) throw new Error("Invalid email or password.");
-    const session: Session = { role: "student", email, verified: true, onboarded: true };
+    const { student } = DEMO_CREDENTIALS;
+    const match =
+      email.trim().toLowerCase() === student.email && password === student.password;
+    if (!match) {
+      await delay(null, 400);
+      throw new Error(`Use the demo login: ${student.email} / ${student.password}`);
+    }
+    const session: Session = { role: "student", email: student.email, verified: true, onboarded: true };
     saveSession(session);
     return delay(session);
   },
 
   async adminLogin(email: string, password: string): Promise<Session> {
-    if (!email || password.length < 6) throw new Error("Invalid admin credentials.");
-    const session: Session = { role: "admin", email, verified: true, onboarded: true };
+    const { admin } = DEMO_CREDENTIALS;
+    const match = email.trim().toLowerCase() === admin.email && password === admin.password;
+    if (!match) {
+      await delay(null, 400);
+      throw new Error(`Use the demo admin login: ${admin.email} / ${admin.password}`);
+    }
+    const session: Session = { role: "admin", email: admin.email, verified: true, onboarded: true };
     saveSession(session);
     return delay(session);
   },
+
 
   async sendOtp(): Promise<{ sent: true }> {
     store.pendingOtp = "123456";

@@ -5,7 +5,7 @@ import { PublicLayout } from "@/layouts/PublicLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { authService } from "@/services/authService";
+import { DEMO_CREDENTIALS, authService } from "@/services/authService";
 
 export const Route = createFileRoute("/admin-login")({
   head: () => ({
@@ -21,8 +21,8 @@ export const Route = createFileRoute("/admin-login")({
 
 function AdminLoginPage() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("moderation@nu.edu.pk");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>(DEMO_CREDENTIALS.admin.email);
+  const [password, setPassword] = useState<string>(DEMO_CREDENTIALS.admin.password);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -71,7 +71,7 @@ function AdminLoginPage() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <p className="mt-1 text-xs text-muted-foreground">
-              Prototype: any password with 6+ characters works.
+              Demo admin: {DEMO_CREDENTIALS.admin.email} / {DEMO_CREDENTIALS.admin.password}
             </p>
           </div>
           {error ? (
