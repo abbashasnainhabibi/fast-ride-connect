@@ -19,6 +19,7 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RequestsRouteImport } from './routes/requests'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SignupRouteImport } from './routes/signup'
@@ -82,6 +83,11 @@ const ProfileRoute = ProfileRouteImport.update({
 const RequestsRoute = RequestsRouteImport.update({
   id: '/requests',
   path: '/requests',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ScheduleRoute = ScheduleRouteImport.update({
@@ -166,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
   '/requests': typeof RequestsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/schedule': typeof ScheduleRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
@@ -192,6 +199,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
   '/requests': typeof RequestsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/schedule': typeof ScheduleRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
@@ -219,6 +227,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/profile': typeof ProfileRoute
   '/requests': typeof RequestsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/schedule': typeof ScheduleRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
@@ -247,6 +256,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/profile'
     | '/requests'
+    | '/reset-password'
     | '/schedule'
     | '/settings'
     | '/signup'
@@ -273,6 +283,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/profile'
     | '/requests'
+    | '/reset-password'
     | '/schedule'
     | '/settings'
     | '/signup'
@@ -299,6 +310,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/profile'
     | '/requests'
+    | '/reset-password'
     | '/schedule'
     | '/settings'
     | '/signup'
@@ -326,6 +338,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ProfileRoute: typeof ProfileRoute
   RequestsRoute: typeof RequestsRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ScheduleRoute: typeof ScheduleRoute
   SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
@@ -412,6 +425,13 @@ declare module '@tanstack/react-router' {
       path: '/requests'
       fullPath: '/requests'
       preLoaderRoute: typeof RequestsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/schedule': {
@@ -526,6 +546,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ProfileRoute: ProfileRoute,
   RequestsRoute: RequestsRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   ScheduleRoute: ScheduleRoute,
   SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,

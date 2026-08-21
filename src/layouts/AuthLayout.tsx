@@ -15,7 +15,7 @@ export function AuthLayout({
   children,
 }: {
   title: string;
-  subtitle?: string;
+  subtitle?: string | undefined;
   children: ReactNode;
 }) {
   return (
