@@ -21,6 +21,7 @@ import { Route as RequestsRouteImport } from './routes/requests'
 import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminActivityRouteImport } from './routes/admin/activity'
@@ -92,6 +93,11 @@ const SignupRoute = SignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VerifyRoute = VerifyRouteImport.update({
   id: '/verify',
   path: '/verify',
@@ -156,6 +162,7 @@ export interface FileRoutesByFullPath {
   '/schedule': typeof ScheduleRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
   '/verify': typeof VerifyRoute
   '/admin/activity': typeof AdminActivityRoute
   '/admin/profile': typeof AdminProfileRoute
@@ -180,6 +187,7 @@ export interface FileRoutesByTo {
   '/schedule': typeof ScheduleRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
   '/verify': typeof VerifyRoute
   '/admin/activity': typeof AdminActivityRoute
   '/admin/profile': typeof AdminProfileRoute
@@ -205,6 +213,7 @@ export interface FileRoutesById {
   '/schedule': typeof ScheduleRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
   '/verify': typeof VerifyRoute
   '/admin/activity': typeof AdminActivityRoute
   '/admin/profile': typeof AdminProfileRoute
@@ -231,6 +240,7 @@ export interface FileRouteTypes {
     | '/schedule'
     | '/settings'
     | '/signup'
+    | '/terms'
     | '/verify'
     | '/admin/activity'
     | '/admin/profile'
@@ -255,6 +265,7 @@ export interface FileRouteTypes {
     | '/schedule'
     | '/settings'
     | '/signup'
+    | '/terms'
     | '/verify'
     | '/admin/activity'
     | '/admin/profile'
@@ -279,6 +290,7 @@ export interface FileRouteTypes {
     | '/schedule'
     | '/settings'
     | '/signup'
+    | '/terms'
     | '/verify'
     | '/admin/activity'
     | '/admin/profile'
@@ -304,6 +316,7 @@ export interface RootRouteChildren {
   ScheduleRoute: typeof ScheduleRoute
   SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
+  TermsRoute: typeof TermsRoute
   VerifyRoute: typeof VerifyRoute
   AdminActivityRoute: typeof AdminActivityRoute
   AdminProfileRoute: typeof AdminProfileRoute
@@ -402,6 +415,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/verify': {
       id: '/verify'
       path: '/verify'
@@ -488,6 +508,7 @@ const rootRouteChildren: RootRouteChildren = {
   ScheduleRoute: ScheduleRoute,
   SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
+  TermsRoute: TermsRoute,
   VerifyRoute: VerifyRoute,
   AdminActivityRoute: AdminActivityRoute,
   AdminProfileRoute: AdminProfileRoute,
