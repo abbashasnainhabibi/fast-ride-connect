@@ -56,6 +56,22 @@ export const authService = {
   },
 
 
+  /** Mock password reset request — no email is actually sent. */
+  async requestPasswordReset(email: string): Promise<{ sent: true }> {
+    await delay(null, 700);
+    if (!authService.isFastEmail(email)) {
+      throw new Error("Use your FAST university email (e.g. k214512@nu.edu.pk).");
+    }
+    return { sent: true } as const;
+  },
+
+  /** Mock password reset — prototype only, nothing is persisted. */
+  async resetPassword(password: string): Promise<{ ok: true }> {
+    await delay(null, 700);
+    if (password.length < 8) throw new Error("Password must be at least 8 characters.");
+    return { ok: true } as const;
+  },
+
   async sendOtp(): Promise<{ sent: true }> {
     store.pendingOtp = "123456";
     return delay({ sent: true } as const, 700);

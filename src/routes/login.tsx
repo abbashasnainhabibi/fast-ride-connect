@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { PublicLayout } from "@/layouts/PublicLayout";
+import { AuthLayout } from "@/layouts/AuthLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -42,53 +42,53 @@ function LoginPage() {
   }
 
   return (
-    <PublicLayout>
-      <div className="mx-auto w-full max-w-md px-4 py-16">
-        <h1 className="text-2xl font-bold">Login</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Use your FAST university email.</p>
-
-        <form onSubmit={onSubmit} className="surface mt-6 space-y-5 p-6" noValidate>
-          <div>
-            <Label htmlFor="login-email">FAST university email</Label>
-            <Input
-              id="login-email"
-              type="email"
-              autoComplete="email"
-              className="mt-1"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
+    <AuthLayout title="Log in to your account" subtitle="Use the FAST university email you signed up with.">
+      <form onSubmit={onSubmit} className="surface space-y-5 p-6" noValidate>
+        <div>
+          <Label htmlFor="login-email">FAST university email</Label>
+          <Input
+            id="login-email"
+            type="email"
+            autoComplete="email"
+            className="mt-1"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <div className="flex items-baseline justify-between">
             <Label htmlFor="login-password">Password</Label>
-            <Input
-              id="login-password"
-              type="password"
-              autoComplete="current-password"
-              className="mt-1"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <p className="mt-1 text-xs text-muted-foreground">
-              Demo login: {DEMO_CREDENTIALS.student.email} / {DEMO_CREDENTIALS.student.password}
-            </p>
-          </div>
-          {error ? (
-            <p role="alert" className="rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">
-              {error}
-            </p>
-          ) : null}
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Logging in…" : "Login"}
-          </Button>
-          <p className="text-center text-sm text-muted-foreground">
-            New here?{" "}
-            <Link to="/signup" className="font-medium text-primary hover:underline">
-              Create an account
+            <Link to="/forgot-password" className="text-xs font-medium text-primary hover:underline">
+              Forgot password?
             </Link>
+          </div>
+          <Input
+            id="login-password"
+            type="password"
+            autoComplete="current-password"
+            className="mt-1"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        {error ? (
+          <p role="alert" className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
+            {error}
           </p>
-        </form>
-      </div>
-    </PublicLayout>
+        ) : null}
+        <Button type="submit" className="w-full" disabled={loading}>
+          {loading ? "Logging in…" : "Login"}
+        </Button>
+        <p className="rounded-md border border-dashed bg-muted/60 px-3 py-2 text-xs text-muted-foreground">
+          Demo login — {DEMO_CREDENTIALS.student.email} / {DEMO_CREDENTIALS.student.password}
+        </p>
+        <p className="text-center text-sm text-muted-foreground">
+          New here?{" "}
+          <Link to="/signup" className="font-medium text-primary hover:underline">
+            Create an account
+          </Link>
+        </p>
+      </form>
+    </AuthLayout>
   );
 }
