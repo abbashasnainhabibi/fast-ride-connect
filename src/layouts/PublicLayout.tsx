@@ -23,12 +23,18 @@ export function PublicLayout({ children }: { children: ReactNode }) {
       <footer className="border-t bg-card">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>Built for FAST students. Not an official FAST NUCES service.</p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <Link to="/login" className="hover:text-foreground">
               Login
             </Link>
             <Link to="/signup" className="hover:text-foreground">
               Create account
+            </Link>
+            <Link to="/privacy" className="hover:text-foreground">
+              Privacy Policy
+            </Link>
+            <Link to="/terms" className="hover:text-foreground">
+              Terms of Use
             </Link>
             <Link to="/admin-login" className="hover:text-foreground">
               Admin
