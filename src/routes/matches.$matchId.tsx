@@ -77,11 +77,19 @@ function MatchDetailPage() {
               {match.pickupArea} (approximate area)
             </p>
 
-            <div>
-              <h3 className="text-sm font-semibold">Shared class days</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {match.sharedDays.length ? match.sharedDays.join(", ") : "No overlapping days"}
-              </p>
+            <div className="rounded-lg border bg-muted/40 p-4">
+              <h3 className="text-sm font-semibold">Why this is a good match</h3>
+              <ul className="mt-2 space-y-1.5 text-sm text-muted-foreground">
+                <li>
+                  {match.sharedDays.length} shared class days —{" "}
+                  {match.sharedDays.length ? match.sharedDays.join(", ") : "no overlapping days"}
+                </li>
+                <li>{match.scheduleNote}</li>
+                <li>Picks up around {match.pickupArea}, close to your area</li>
+                <li>
+                  {RIDE_TYPE_LABEL[match.rideType]} · {match.verified ? "Verified FAST email" : "Not yet verified"}
+                </li>
+              </ul>
             </div>
 
             <div>
