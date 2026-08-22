@@ -59,7 +59,7 @@ function DashboardPage() {
   return (
     <StudentLayout
       title="Your matches"
-      description="Ranked by timetable overlap, pickup area and your partner preference."
+      description={`${matches.length} compatible ${matches.length === 1 ? "student" : "students"} — ranked by timetable overlap, pickup area and your partner preference.`}
     >
       <div className="surface mb-6 flex flex-col gap-3 p-4 sm:flex-row">
         <div className="relative flex-1">

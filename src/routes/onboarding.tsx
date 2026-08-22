@@ -24,7 +24,7 @@ export const Route = createFileRoute("/onboarding")({
   component: OnboardingPage,
 });
 
-const STEPS = ["Ride type", "Gender", "Partner preference", "Pickup area", "Phone"];
+const STEPS = ["Ride", "Preferences", "Pickup", "Phone", "Timetable"];
 
 function Option({
   id,
@@ -102,31 +102,30 @@ function OnboardingPage() {
           ) : null}
 
           {step === 1 ? (
-            <fieldset>
-              <legend className="text-lg font-semibold">Your gender</legend>
-              <RadioGroup className="mt-4 gap-3" value={gender} onValueChange={(v) => setGender(v as Gender)}>
-                <Option id="g-male" value="male" label="Male" />
-                <Option id="g-female" value="female" label="Female" />
-              </RadioGroup>
-            </fieldset>
+            <div className="space-y-6">
+              <fieldset>
+                <legend className="text-lg font-semibold">Your gender</legend>
+                <RadioGroup className="mt-4 gap-3" value={gender} onValueChange={(v) => setGender(v as Gender)}>
+                  <Option id="g-male" value="male" label="Male" />
+                  <Option id="g-female" value="female" label="Female" />
+                </RadioGroup>
+              </fieldset>
+              <fieldset>
+                <legend className="text-lg font-semibold">Preferred carpool partner</legend>
+                <RadioGroup
+                  className="mt-4 gap-3"
+                  value={preference}
+                  onValueChange={(v) => setPreference(v as PartnerPreference)}
+                >
+                  <Option id="p-any" value="anyone" label="Anyone" />
+                  <Option id="p-male" value="male" label="Male only" />
+                  <Option id="p-female" value="female" label="Female only" />
+                </RadioGroup>
+              </fieldset>
+            </div>
           ) : null}
 
           {step === 2 ? (
-            <fieldset>
-              <legend className="text-lg font-semibold">Preferred carpool partner gender</legend>
-              <RadioGroup
-                className="mt-4 gap-3"
-                value={preference}
-                onValueChange={(v) => setPreference(v as PartnerPreference)}
-              >
-                <Option id="p-any" value="anyone" label="Anyone" />
-                <Option id="p-male" value="male" label="Male" />
-                <Option id="p-female" value="female" label="Female" />
-              </RadioGroup>
-            </fieldset>
-          ) : null}
-
-          {step === 3 ? (
             <fieldset>
               <legend className="text-lg font-semibold">Approximate pickup area</legend>
               <p className="mt-2 flex items-start gap-2 rounded-lg bg-accent/60 p-3 text-sm text-accent-foreground">
@@ -141,7 +140,7 @@ function OnboardingPage() {
             </fieldset>
           ) : null}
 
-          {step === 4 ? (
+          {step === 3 ? (
             <div>
               <h2 className="text-lg font-semibold">Phone number</h2>
               <p className="mt-2 flex items-start gap-2 rounded-lg bg-accent/60 p-3 text-sm text-accent-foreground">
@@ -172,12 +171,42 @@ function OnboardingPage() {
             </div>
           ) : null}
 
+          {step === 4 ? (
+            <div>
+              <h2 className="text-lg font-semibold">Add your timetable</h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Last step. Upload your FAST timetable and we'll read only the class days and
+                timings — course names, sections and teachers are never stored or shown.
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+                <li className="flex items-start gap-2">
+                  <ShieldCheck className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+                  You can review and edit every timing before it is saved.
+                </li>
+                <li className="flex items-start gap-2">
+                  <Info className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+                  Prefer typing? You can enter timings manually on the next screen.
+                </li>
+              </ul>
+            </div>
+          ) : null}
+
           <div className="flex justify-between gap-3 pt-2">
             <Button variant="outline" onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0}>
               Back
             </Button>
             {step < STEPS.length - 1 ? (
-              <Button onClick={() => setStep((s) => s + 1)}>Continue</Button>
+              <Button
+                onClick={() => {
+                  if (step === 3 && phone.trim().length < 10) {
+                    setPhoneError("Enter a valid phone number.");
+                    return;
+                  }
+                  setStep((s) => s + 1);
+                }}
+              >
+                Continue
+              </Button>
             ) : (
               <Button onClick={finish} disabled={saving}>
                 {saving ? "Saving…" : "Save and continue"}

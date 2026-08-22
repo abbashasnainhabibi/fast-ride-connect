@@ -6,6 +6,17 @@ import { AdminLayout } from "@/layouts/AdminLayout";
 import { EmptyState, ErrorState, LoadingState } from "@/components/States";
 import { StatusPill, VerifiedBadge } from "@/components/VerifiedBadge";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -103,20 +114,31 @@ function AdminUsers() {
                   </TableCell>
                   <TableCell className="text-right tabular-nums">{u.reportsReceived}</TableCell>
                   <TableCell>
-                    <div className="flex justify-end gap-2">
+                     <div className="flex justify-end gap-2">
                       {u.status === "active" ? (
-                        <Button size="sm" variant="outline" onClick={() => setStatus(u.id, "suspended", u.name)}>
-                          Suspend
-                        </Button>
+                        <Confirm
+                          label="Suspend"
+                          title={`Suspend ${u.name}?`}
+                          description="They will lose access to matches and requests until reinstated."
+                          onConfirm={() => setStatus(u.id, "suspended", u.name)}
+                        />
                       ) : (
-                        <Button size="sm" variant="outline" onClick={() => setStatus(u.id, "active", u.name)}>
-                          Reinstate
-                        </Button>
+                        <Confirm
+                          label="Reinstate"
+                          title={`Reinstate ${u.name}?`}
+                          description="Their account becomes active and visible in matching again."
+                          onConfirm={() => setStatus(u.id, "active", u.name)}
+                        />
                       )}
                       {u.status !== "banned" ? (
-                        <Button size="sm" variant="ghost" onClick={() => setStatus(u.id, "banned", u.name)}>
-                          Ban
-                        </Button>
+                        <Confirm
+                          label="Ban"
+                          variant="ghost"
+                          destructive
+                          title={`Ban ${u.name}?`}
+                          description="This permanently removes their access to FAST Carpool."
+                          onConfirm={() => setStatus(u.id, "banned", u.name)}
+                        />
                       ) : null}
                     </div>
                   </TableCell>
@@ -127,5 +149,46 @@ function AdminUsers() {
         </div>
       ) : null}
     </AdminLayout>
+  );
+}
+
+function Confirm({
+  label,
+  title,
+  description,
+  onConfirm,
+  variant = "outline",
+  destructive = false,
+}: {
+  label: string;
+  title: string;
+  description: string;
+  onConfirm: () => void;
+  variant?: "outline" | "ghost";
+  destructive?: boolean;
+}) {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button size="sm" variant={variant} className={destructive ? "text-destructive" : undefined}>
+          {label}
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription>{description}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction
+            className={destructive ? "bg-destructive text-destructive-foreground hover:bg-destructive/90" : undefined}
+            onClick={onConfirm}
+          >
+            {label}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
