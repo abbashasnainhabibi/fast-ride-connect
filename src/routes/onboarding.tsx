@@ -132,13 +132,49 @@ function OnboardingPage() {
                 <ShieldCheck className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
                 Don't enter your home address. Choose a nearby area or public landmark instead.
               </p>
-              <RadioGroup className="mt-4 gap-3" value={pickupArea} onValueChange={setPickupArea}>
-                {PICKUP_AREAS.map((area) => (
-                  <Option key={area} id={`area-${area}`} value={area} label={area} />
-                ))}
-              </RadioGroup>
+              <Label className="mt-4 block">Search for an area</Label>
+              <Popover open={areaOpen} onOpenChange={setAreaOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={areaOpen}
+                    className="mt-1 w-full justify-between font-normal"
+                  >
+                    {pickupArea}
+                    <ChevronsUpDown className="size-4 opacity-50" aria-hidden="true" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
+                  <Command>
+                    <CommandInput placeholder="Search areas or landmarks…" />
+                    <CommandList>
+                      <CommandEmpty>No area found.</CommandEmpty>
+                      <CommandGroup>
+                        {PICKUP_AREAS.map((area) => (
+                          <CommandItem
+                            key={area}
+                            value={area}
+                            onSelect={() => {
+                              setPickupArea(area);
+                              setAreaOpen(false);
+                            }}
+                          >
+                            <Check
+                              className={`mr-2 size-4 ${pickupArea === area ? "opacity-100" : "opacity-0"}`}
+                              aria-hidden="true"
+                            />
+                            {area}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
             </fieldset>
           ) : null}
+
 
           {step === 3 ? (
             <div>
