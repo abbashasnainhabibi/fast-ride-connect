@@ -151,3 +151,44 @@ function AdminUsers() {
     </AdminLayout>
   );
 }
+
+function Confirm({
+  label,
+  title,
+  description,
+  onConfirm,
+  variant = "outline",
+  destructive = false,
+}: {
+  label: string;
+  title: string;
+  description: string;
+  onConfirm: () => void;
+  variant?: "outline" | "ghost";
+  destructive?: boolean;
+}) {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button size="sm" variant={variant} className={destructive ? "text-destructive" : undefined}>
+          {label}
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription>{description}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction
+            className={destructive ? "bg-destructive text-destructive-foreground hover:bg-destructive/90" : undefined}
+            onClick={onConfirm}
+          >
+            {label}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+}
