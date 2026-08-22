@@ -186,19 +186,35 @@ function OnboardingPage() {
               <Label htmlFor="phone" className="mt-4 block">
                 Phone number
               </Label>
-              <Input
-                id="phone"
-                className="mt-1"
-                type="tel"
-                placeholder="+92 300 1234567"
-                value={phone}
-                aria-invalid={!!phoneError}
-                aria-describedby={phoneError ? "phone-error" : undefined}
-                onChange={(e) => {
-                  setPhone(e.target.value);
-                  setPhoneError(null);
-                }}
-              />
+              <div className="mt-1 flex gap-2">
+                <Select value={dialCode} onValueChange={setDialCode}>
+                  <SelectTrigger className="w-32" aria-label="Country code">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {DIAL_CODES.map((c) => (
+                      <SelectItem key={c.code} value={c.code}>
+                        {c.flag} {c.code}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Input
+                  id="phone"
+                  className="flex-1"
+                  type="tel"
+                  inputMode="tel"
+                  placeholder="300 1234567"
+                  value={phone}
+                  aria-invalid={!!phoneError}
+                  aria-describedby={phoneError ? "phone-error" : undefined}
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                    setPhoneError(null);
+                  }}
+                />
+              </div>
+
               {phoneError ? (
                 <p id="phone-error" className="mt-1 text-xs text-destructive">
                   {phoneError}
