@@ -132,13 +132,49 @@ function OnboardingPage() {
                 <ShieldCheck className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
                 Don't enter your home address. Choose a nearby area or public landmark instead.
               </p>
-              <RadioGroup className="mt-4 gap-3" value={pickupArea} onValueChange={setPickupArea}>
-                {PICKUP_AREAS.map((area) => (
-                  <Option key={area} id={`area-${area}`} value={area} label={area} />
-                ))}
-              </RadioGroup>
+              <Label className="mt-4 block">Search for an area</Label>
+              <Popover open={areaOpen} onOpenChange={setAreaOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={areaOpen}
+                    className="mt-1 w-full justify-between font-normal"
+                  >
+                    {pickupArea}
+                    <ChevronsUpDown className="size-4 opacity-50" aria-hidden="true" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
+                  <Command>
+                    <CommandInput placeholder="Search areas or landmarks…" />
+                    <CommandList>
+                      <CommandEmpty>No area found.</CommandEmpty>
+                      <CommandGroup>
+                        {PICKUP_AREAS.map((area) => (
+                          <CommandItem
+                            key={area}
+                            value={area}
+                            onSelect={() => {
+                              setPickupArea(area);
+                              setAreaOpen(false);
+                            }}
+                          >
+                            <Check
+                              className={`mr-2 size-4 ${pickupArea === area ? "opacity-100" : "opacity-0"}`}
+                              aria-hidden="true"
+                            />
+                            {area}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
             </fieldset>
           ) : null}
+
 
           {step === 3 ? (
             <div>
@@ -150,19 +186,35 @@ function OnboardingPage() {
               <Label htmlFor="phone" className="mt-4 block">
                 Phone number
               </Label>
-              <Input
-                id="phone"
-                className="mt-1"
-                type="tel"
-                placeholder="+92 300 1234567"
-                value={phone}
-                aria-invalid={!!phoneError}
-                aria-describedby={phoneError ? "phone-error" : undefined}
-                onChange={(e) => {
-                  setPhone(e.target.value);
-                  setPhoneError(null);
-                }}
-              />
+              <div className="mt-1 flex gap-2">
+                <Select value={dialCode} onValueChange={setDialCode}>
+                  <SelectTrigger className="w-32" aria-label="Country code">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {DIAL_CODES.map((c) => (
+                      <SelectItem key={c.code} value={c.code}>
+                        {c.flag} {c.code}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Input
+                  id="phone"
+                  className="flex-1"
+                  type="tel"
+                  inputMode="tel"
+                  placeholder="300 1234567"
+                  value={phone}
+                  aria-invalid={!!phoneError}
+                  aria-describedby={phoneError ? "phone-error" : undefined}
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                    setPhoneError(null);
+                  }}
+                />
+              </div>
+
               {phoneError ? (
                 <p id="phone-error" className="mt-1 text-xs text-destructive">
                   {phoneError}
