@@ -82,17 +82,25 @@ function OnboardingPage() {
   const [gender, setGender] = useState<Gender>("male");
   const [preference, setPreference] = useState<PartnerPreference>("anyone");
   const [pickupArea, setPickupArea] = useState(PICKUP_AREAS[0]!);
+  const [areaOpen, setAreaOpen] = useState(false);
+  const [dialCode, setDialCode] = useState(DIAL_CODES[0]!.code);
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState<string | null>(null);
 
   async function finish() {
-    if (phone.trim().length < 10) {
+    if (digits(phone).length < 9) {
       setPhoneError("Enter a valid phone number.");
       return;
     }
     setSaving(true);
     try {
-      await profileService.updateProfile({ rideType, gender, partnerPreference: preference, pickupArea, phone });
+      await profileService.updateProfile({
+        rideType,
+        gender,
+        partnerPreference: preference,
+        pickupArea,
+        phone: `${dialCode} ${phone.trim()}`,
+      });
       authService.setOnboarded();
       toast.success("Profile saved");
       navigate({ to: "/timetable/upload" });
