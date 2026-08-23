@@ -110,12 +110,28 @@ function ReportCard({ report, onChanged }: { report: Report; onChanged: () => vo
         <Button size="sm" variant="outline" onClick={() => setStatus("under_review")} disabled={busy}>
           Mark under review
         </Button>
-        <Button size="sm" variant="ghost" onClick={() => setStatus("dismissed")} disabled={busy}>
-          Dismiss
-        </Button>
-        <Button size="sm" onClick={() => setStatus("resolved")} disabled={busy}>
-          Resolve
-        </Button>
+        <ConfirmAction
+          trigger={
+            <Button size="sm" variant="ghost" disabled={busy}>
+              Dismiss
+            </Button>
+          }
+          title={`Dismiss ${report.id}?`}
+          description="The report will be closed with no action taken against the student. This is recorded in the activity log."
+          confirmLabel="Dismiss report"
+          onConfirm={() => setStatus("dismissed")}
+        />
+        <ConfirmAction
+          trigger={
+            <Button size="sm" disabled={busy}>
+              Resolve
+            </Button>
+          }
+          title={`Resolve ${report.id}?`}
+          description="Mark this case as handled. Make sure any account action has already been applied."
+          confirmLabel="Resolve report"
+          onConfirm={() => setStatus("resolved")}
+        />
       </div>
     </li>
   );
