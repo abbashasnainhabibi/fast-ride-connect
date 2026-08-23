@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { FileWarning } from "lucide-react";
 import { toast } from "sonner";
@@ -50,7 +50,7 @@ function ConfirmAction({
   confirmLabel,
   onConfirm,
 }: {
-  trigger: React.ReactNode;
+  trigger: ReactNode;
   title: string;
   description: string;
   confirmLabel: string;
