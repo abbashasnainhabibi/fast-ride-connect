@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { FileWarning } from "lucide-react";
 import { toast } from "sonner";
@@ -8,6 +8,17 @@ import { StatusPill } from "@/components/VerifiedBadge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { useAsync } from "@/hooks/useAsync";
 import type { Report, ReportStatus } from "@/mock/types";
 import { adminService } from "@/services/adminService";
@@ -31,6 +42,36 @@ const FILTERS: { value: "all" | ReportStatus; label: string }[] = [
   { value: "resolved", label: "Resolved" },
   { value: "dismissed", label: "Dismissed" },
 ];
+
+function ConfirmAction({
+  trigger,
+  title,
+  description,
+  confirmLabel,
+  onConfirm,
+}: {
+  trigger: ReactNode;
+  title: string;
+  description: string;
+  confirmLabel: string;
+  onConfirm: () => void;
+}) {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription>{description}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={onConfirm}>{confirmLabel}</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+}
 
 function ReportCard({ report, onChanged }: { report: Report; onChanged: () => void }) {
   const [note, setNote] = useState("");
@@ -110,12 +151,28 @@ function ReportCard({ report, onChanged }: { report: Report; onChanged: () => vo
         <Button size="sm" variant="outline" onClick={() => setStatus("under_review")} disabled={busy}>
           Mark under review
         </Button>
-        <Button size="sm" variant="ghost" onClick={() => setStatus("dismissed")} disabled={busy}>
-          Dismiss
-        </Button>
-        <Button size="sm" onClick={() => setStatus("resolved")} disabled={busy}>
-          Resolve
-        </Button>
+        <ConfirmAction
+          trigger={
+            <Button size="sm" variant="ghost" disabled={busy}>
+              Dismiss
+            </Button>
+          }
+          title={`Dismiss ${report.id}?`}
+          description="The report will be closed with no action taken against the student. This is recorded in the activity log."
+          confirmLabel="Dismiss report"
+          onConfirm={() => setStatus("dismissed")}
+        />
+        <ConfirmAction
+          trigger={
+            <Button size="sm" disabled={busy}>
+              Resolve
+            </Button>
+          }
+          title={`Resolve ${report.id}?`}
+          description="Mark this case as handled. Make sure any account action has already been applied."
+          confirmLabel="Resolve report"
+          onConfirm={() => setStatus("resolved")}
+        />
       </div>
     </li>
   );

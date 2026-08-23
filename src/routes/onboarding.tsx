@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Info, ShieldCheck } from "lucide-react";
+import { Check, ChevronsUpDown, Info, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { PublicLayout } from "@/layouts/PublicLayout";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,22 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { PICKUP_AREAS, type Gender, type PartnerPreference, type RideType } from "@/mock/types";
 import { profileService } from "@/services/profileService";
 import { authService } from "@/services/authService";
@@ -25,6 +41,16 @@ export const Route = createFileRoute("/onboarding")({
 });
 
 const STEPS = ["Ride", "Preferences", "Pickup", "Phone", "Timetable"];
+
+const DIAL_CODES = [
+  { code: "+92", flag: "🇵🇰" },
+  { code: "+971", flag: "🇦🇪" },
+  { code: "+966", flag: "🇸🇦" },
+  { code: "+44", flag: "🇬🇧" },
+  { code: "+1", flag: "🇺🇸" },
+];
+
+const digits = (v: string) => v.replace(/\D/g, "");
 
 function Option({
   id,
@@ -56,17 +82,25 @@ function OnboardingPage() {
   const [gender, setGender] = useState<Gender>("male");
   const [preference, setPreference] = useState<PartnerPreference>("anyone");
   const [pickupArea, setPickupArea] = useState(PICKUP_AREAS[0]!);
+  const [areaOpen, setAreaOpen] = useState(false);
+  const [dialCode, setDialCode] = useState(DIAL_CODES[0]!.code);
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState<string | null>(null);
 
   async function finish() {
-    if (phone.trim().length < 10) {
+    if (digits(phone).length < 9) {
       setPhoneError("Enter a valid phone number.");
       return;
     }
     setSaving(true);
     try {
-      await profileService.updateProfile({ rideType, gender, partnerPreference: preference, pickupArea, phone });
+      await profileService.updateProfile({
+        rideType,
+        gender,
+        partnerPreference: preference,
+        pickupArea,
+        phone: `${dialCode} ${phone.trim()}`,
+      });
       authService.setOnboarded();
       toast.success("Profile saved");
       navigate({ to: "/timetable/upload" });
@@ -250,7 +284,7 @@ function OnboardingPage() {
             {step < STEPS.length - 1 ? (
               <Button
                 onClick={() => {
-                  if (step === 3 && phone.trim().length < 10) {
+                  if (step === 3 && digits(phone).length < 9) {
                     setPhoneError("Enter a valid phone number.");
                     return;
                   }
