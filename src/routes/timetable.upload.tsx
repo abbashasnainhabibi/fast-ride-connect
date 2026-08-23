@@ -78,7 +78,7 @@ function UploadPage() {
         <div className="surface p-6">
           {processing ? (
             <div className="flex flex-col items-center gap-3 rounded-lg border border-border p-10 text-center">
-              <Loader2 className="size-7 text-primary" aria-hidden="true" />
+              <Loader2 className="size-7 animate-spin text-primary" aria-hidden="true" />
               <p className="font-medium" aria-live="polite">
                 Reading your timetable…
               </p>
