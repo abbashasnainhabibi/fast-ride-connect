@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Info, ShieldCheck } from "lucide-react";
+import { Check, ChevronsUpDown, Info, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { PublicLayout } from "@/layouts/PublicLayout";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,22 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { PICKUP_AREAS, type Gender, type PartnerPreference, type RideType } from "@/mock/types";
 import { profileService } from "@/services/profileService";
 import { authService } from "@/services/authService";
