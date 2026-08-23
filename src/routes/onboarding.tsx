@@ -42,6 +42,16 @@ export const Route = createFileRoute("/onboarding")({
 
 const STEPS = ["Ride", "Preferences", "Pickup", "Phone", "Timetable"];
 
+const DIAL_CODES = [
+  { code: "+92", flag: "🇵🇰" },
+  { code: "+971", flag: "🇦🇪" },
+  { code: "+966", flag: "🇸🇦" },
+  { code: "+44", flag: "🇬🇧" },
+  { code: "+1", flag: "🇺🇸" },
+];
+
+const digits = (v: string) => v.replace(/\D/g, "");
+
 function Option({
   id,
   value,
