@@ -284,7 +284,7 @@ function OnboardingPage() {
             {step < STEPS.length - 1 ? (
               <Button
                 onClick={() => {
-                  if (step === 3 && phone.trim().length < 10) {
+                  if (step === 3 && digits(phone).length < 9) {
                     setPhoneError("Enter a valid phone number.");
                     return;
                   }
