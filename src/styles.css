@@ -67,18 +67,18 @@
   --card-foreground: #172033;
   --popover: #ffffff;
   --popover-foreground: #172033;
-  --primary: #123b6d;
+  --primary: #076be3;
   --primary-foreground: #ffffff;
-  --brand: #1f5f9e;
+  --brand: #076be3;
   --brand-foreground: #ffffff;
   --navy: #123b6d;
   --navy-foreground: #ffffff;
   --secondary: #eef2f7;
-  --secondary-foreground: #123b6d;
+  --secondary-foreground: #0b3f86;
   --muted: #f1f4f9;
   --muted-foreground: #667085;
-  --accent: #eaf1f9;
-  --accent-foreground: #123b6d;
+  --accent: #e8f1fe;
+  --accent-foreground: #0b3f86;
   --destructive: #c0392b;
   --destructive-foreground: #ffffff;
   --success: #198754;
@@ -87,15 +87,15 @@
   --warning-foreground: #ffffff;
   --border: #e4e8ef;
   --input: #e4e8ef;
-  --ring: #1f5f9e;
-  --chart-1: #123b6d;
-  --chart-2: #1f5f9e;
+  --ring: #076be3;
+  --chart-1: #076be3;
+  --chart-2: #123b6d;
   --chart-3: #198754;
   --chart-4: #b7791f;
   --chart-5: #c0392b;
   --sidebar: #123b6d;
   --sidebar-foreground: #dfe7f1;
-  --sidebar-primary: #1f5f9e;
+  --sidebar-primary: #076be3;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #1a4a83;
   --sidebar-accent-foreground: #ffffff;
@@ -110,10 +110,10 @@
   --card-foreground: #eef2f7;
   --popover: #141f33;
   --popover-foreground: #eef2f7;
-  --primary: #4a86c4;
-  --primary-foreground: #0e1626;
-  --brand: #4a86c4;
-  --brand-foreground: #0e1626;
+  --primary: #2f86ff;
+  --primary-foreground: #ffffff;
+  --brand: #2f86ff;
+  --brand-foreground: #ffffff;
   --navy: #141f33;
   --navy-foreground: #eef2f7;
   --secondary: #1c2a42;
@@ -130,7 +130,7 @@
   --warning-foreground: #0e1626;
   --border: rgb(255 255 255 / 0.12);
   --input: rgb(255 255 255 / 0.16);
-  --ring: #4a86c4;
+  --ring: #2f86ff;
   --chart-1: #4a86c4;
   --chart-2: #6fa3d6;
   --chart-3: #2ea36a;
@@ -138,7 +138,7 @@
   --chart-5: #d9584a;
   --sidebar: #101a2c;
   --sidebar-foreground: #dfe7f1;
-  --sidebar-primary: #1f5f9e;
+  --sidebar-primary: #076be3;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #1c2a42;
   --sidebar-accent-foreground: #ffffff;
@@ -180,12 +180,6 @@
   box-shadow: var(--shadow-soft);
 }
 
-/* Subtle navy band used sparingly for brand areas. */
-@utility hero-navy {
-  background-color: #123b6d;
-  background-image: linear-gradient(160deg, #123b6d 0%, #16457c 100%);
-}
-
 /* Faint route/grid texture for auth branding panels. */
 @utility route-grid {
   background-image:
@@ -221,4 +215,12 @@
   & li {
     margin-bottom: 0.25rem;
   }
+}
+
+/* Deep navy band with a faint blue wash — used for hero + auth brand panels. */
+@utility hero-navy {
+  background-color: #0f2f5c;
+  background-image:
+    radial-gradient(1100px 420px at 12% -10%, rgb(7 107 227 / 0.45) 0%, transparent 60%),
+    linear-gradient(165deg, #0f2f5c 0%, #123b6d 55%, #0d2a52 100%);
 }

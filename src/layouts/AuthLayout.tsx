@@ -21,13 +21,13 @@ export function AuthLayout({
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-2">
       {/* Brand panel */}
-      <aside className="hero-navy route-grid hidden lg:flex lg:flex-col lg:justify-between lg:border-r lg:border-border lg:px-12 lg:py-10">
+      <aside className="hero-navy route-grid hidden lg:flex lg:flex-col lg:justify-between lg:border-r lg:border-white/10 lg:px-14 lg:py-12">
         <Brand tone="light" />
         <div className="max-w-md">
-          <h2 className="font-display text-3xl font-bold leading-tight text-navy-foreground">
+          <h2 className="font-display text-[2rem] font-bold leading-[1.15] tracking-tight text-navy-foreground">
             Carpool with students who share your schedule.
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-navy-foreground/75">
+          <p className="mt-4 text-sm leading-relaxed text-navy-foreground/70">
             FAST Carpool matches you with verified classmates travelling the same way, at the same time.
           </p>
           <ul className="mt-8 space-y-5">

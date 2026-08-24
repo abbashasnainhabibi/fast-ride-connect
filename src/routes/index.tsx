@@ -42,32 +42,59 @@ const PRIVACY = [
   { icon: Eye, title: "Course information stays private", text: "We use only days and timings from your timetable — never course, teacher or room." },
 ];
 
+const TRUST = [
+  { value: "FAST only", label: "Verified university emails" },
+  { value: "Timings only", label: "No course or teacher data" },
+  { value: "Landmarks", label: "Never home addresses" },
+  { value: "Private", label: "Number hidden until accepted" },
+];
+
 function Landing() {
   return (
     <PublicLayout>
-      <section className="hero-navy">
-        <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-20 sm:py-28">
+      <section className="hero-navy route-grid border-b">
+        <div className="mx-auto w-full max-w-6xl px-4 py-20 sm:py-28">
           <div className="max-w-2xl">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-navy-foreground">
+            <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium tracking-wide text-navy-foreground">
+              <BadgeCheck className="size-3.5" aria-hidden="true" />
               Built for FAST students
             </p>
-            <h1 className="mt-5 text-4xl font-bold leading-tight text-navy-foreground sm:text-5xl">
-              Find Your FAST Carpool.
+            <h1 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight text-navy-foreground sm:text-6xl">
+              Find your FAST carpool.
             </h1>
-            <p className="mt-4 text-lg text-navy-foreground/80">
-              Connect with FAST students who live near you and have a similar university schedule.
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-navy-foreground/75">
+              Connect with verified FAST students who live near you and share your university schedule — matched on
+              real class timings, not guesswork.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-9 flex flex-wrap items-center gap-3">
               <Button asChild size="lg">
-                <Link to="/signup">Get Started</Link>
+                <Link to="/signup">Get started free</Link>
               </Button>
-              <Button asChild size="lg" variant="secondary">
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-white/25 bg-transparent text-navy-foreground hover:bg-white/10 hover:text-navy-foreground"
+              >
                 <Link to="/login">Login</Link>
               </Button>
             </div>
+            <p className="mt-4 text-xs text-navy-foreground/55">
+              Free for students · No car required · Takes about two minutes
+            </p>
           </div>
+
+          <dl className="mt-16 grid gap-px overflow-hidden rounded-xl border border-white/15 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+            {TRUST.map((t) => (
+              <div key={t.value} className="bg-transparent px-5 py-4 backdrop-blur-[1px]">
+                <dt className="font-display text-base font-semibold text-navy-foreground">{t.value}</dt>
+                <dd className="mt-1 text-xs text-navy-foreground/65">{t.label}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
+
 
       <section className="mx-auto w-full max-w-6xl px-4 py-16" aria-labelledby="how">
         <h2 id="how" className="text-2xl font-bold sm:text-3xl">
@@ -120,12 +147,29 @@ function Landing() {
             </article>
           ))}
         </div>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Button asChild size="lg">
-            <Link to="/signup">Create your account</Link>
-          </Button>
+      </section>
+
+      <section className="border-t bg-card">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-14 sm:flex-row sm:items-center sm:justify-between">
+          <div className="max-w-xl">
+            <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+              Ready to share the ride?
+            </h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Verify your FAST email, add your timetable, and see compatible students in minutes.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild size="lg">
+              <Link to="/signup">Create your account</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link to="/login">I already have one</Link>
+            </Button>
+          </div>
         </div>
       </section>
+
     </PublicLayout>
   );
 }
