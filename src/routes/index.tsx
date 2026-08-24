@@ -147,12 +147,29 @@ function Landing() {
             </article>
           ))}
         </div>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Button asChild size="lg">
-            <Link to="/signup">Create your account</Link>
-          </Button>
+      </section>
+
+      <section className="border-t bg-card">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-14 sm:flex-row sm:items-center sm:justify-between">
+          <div className="max-w-xl">
+            <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+              Ready to share the ride?
+            </h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Verify your FAST email, add your timetable, and see compatible students in minutes.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild size="lg">
+              <Link to="/signup">Create your account</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link to="/login">I already have one</Link>
+            </Button>
+          </div>
         </div>
       </section>
+
     </PublicLayout>
   );
 }
