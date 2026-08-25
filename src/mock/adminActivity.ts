@@ -37,9 +37,9 @@ export const adminProfile = {
 };
 
 export const adminStats = [
-  { label: "Total Users", value: "1,248" },
-  { label: "Verified Students", value: "1,186" },
-  { label: "Active Connections", value: "324" },
-  { label: "Pending Reports", value: "12" },
-  { label: "Suspended Accounts", value: "8" },
+  { label: "Total Users", value: "1,248", trend: "+4.2%", up: true },
+  { label: "Verified Students", value: "1,186", trend: "+3.8%", up: true },
+  { label: "Active Connections", value: "324", trend: "+11.3%", up: true },
+  { label: "Pending Reports", value: "12", trend: "-2", up: true },
+  { label: "Suspended Accounts", value: "8", trend: "+1", up: false },
 ];

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Search } from "lucide-react";
+import { ArrowUpDown, Search } from "lucide-react";
 import { toast } from "sonner";
 import { AdminLayout } from "@/layouts/AdminLayout";
 import { EmptyState, ErrorState, LoadingState } from "@/components/States";
@@ -42,19 +42,23 @@ export const Route = createFileRoute("/admin/users")({
   component: AdminUsers,
 });
 
+type SortKey = "name" | "reports";
+
 function AdminUsers() {
   const { data, error, loading, reload } = useAsync(() => adminService.getUsers());
   const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<SortKey>("name");
 
-  const users = useMemo(
-    () =>
-      (data ?? []).filter(
-        (u) =>
-          u.name.toLowerCase().includes(query.toLowerCase()) ||
-          u.email.toLowerCase().includes(query.toLowerCase()),
-      ),
-    [data, query],
-  );
+  const users = useMemo(() => {
+    const filtered = (data ?? []).filter(
+      (u) =>
+        u.name.toLowerCase().includes(query.toLowerCase()) ||
+        u.email.toLowerCase().includes(query.toLowerCase()),
+    );
+    return [...filtered].sort((a, b) =>
+      sort === "name" ? a.name.localeCompare(b.name) : b.reportsReceived - a.reportsReceived,
+    );
+  }, [data, query, sort]);
 
   async function setStatus(id: string, status: AccountStatus, name: string) {
     await adminService.setUserStatus(id, status);
@@ -91,10 +95,28 @@ function AdminUsers() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Student</TableHead>
+                <TableHead>
+                  <button
+                    type="button"
+                    onClick={() => setSort("name")}
+                    className="inline-flex items-center gap-1 transition-colors duration-150 ease-out hover:text-foreground"
+                  >
+                    Student
+                    <ArrowUpDown className={`size-3 ${sort === "name" ? "text-foreground" : "text-muted-foreground/50"}`} aria-hidden="true" />
+                  </button>
+                </TableHead>
                 <TableHead>Pickup area</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="text-right">Reports</TableHead>
+                <TableHead className="text-right">
+                  <button
+                    type="button"
+                    onClick={() => setSort("reports")}
+                    className="inline-flex items-center gap-1 transition-colors duration-150 ease-out hover:text-foreground"
+                  >
+                    Reports
+                    <ArrowUpDown className={`size-3 ${sort === "reports" ? "text-foreground" : "text-muted-foreground/50"}`} aria-hidden="true" />
+                  </button>
+                </TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>

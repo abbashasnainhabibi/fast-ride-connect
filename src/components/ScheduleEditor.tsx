@@ -13,6 +13,14 @@ import {
 import { DAYS, type ClassSlot, type Day } from "@/mock/types";
 import { newSlot } from "@/services/store";
 
+const PRESET_WINDOWS = [
+  { start: "08:00", end: "09:30" },
+  { start: "09:30", end: "11:00" },
+  { start: "11:00", end: "12:30" },
+  { start: "12:30", end: "14:00" },
+  { start: "14:00", end: "15:30" },
+];
+
 export function ScheduleEditor({
   slots,
   onChange,
@@ -26,7 +34,45 @@ export function ScheduleEditor({
     onChange(slots.map((s) => (s.id === id ? { ...s, ...patch } : s)));
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
+      {/* Quick toggle chips */}
+      <div className="rounded-xl border p-4">
+        <p className="text-xs font-medium text-muted-foreground">
+          Quick toggle — tap a time to add or remove it from that day
+        </p>
+        <div className="mt-3 space-y-2">
+          {DAYS.map((day) => (
+            <div key={day} className="flex flex-wrap items-center gap-1.5">
+              <span className="w-9 shrink-0 text-xs font-semibold">{day.slice(0, 3)}</span>
+              {PRESET_WINDOWS.map((w) => {
+                const existing = slots.find((s) => s.day === day && s.start === w.start);
+                return (
+                  <button
+                    key={w.start}
+                    type="button"
+                    aria-pressed={!!existing}
+                    aria-label={`${day} ${w.start}`}
+                    onClick={() =>
+                      existing
+                        ? onChange(slots.filter((s) => s.id !== existing.id))
+                        : onChange([...slots, newSlot({ day, start: w.start, end: w.end })])
+                    }
+                    className={`nums rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors duration-150 ease-out ${
+                      existing
+                        ? "border-foreground bg-foreground text-background"
+                        : "text-muted-foreground hover:border-foreground/40 hover:text-foreground"
+                    }`}
+                  >
+                    {w.start}
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Fine-tune rows */}
       <ul className="space-y-3">
         {slots.map((slot) => (
           <li key={slot.id} className="rounded-xl border bg-card p-3 sm:flex sm:items-end sm:gap-3">
