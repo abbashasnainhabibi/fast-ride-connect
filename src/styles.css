@@ -67,12 +67,12 @@
   --card-foreground: #18181b;
   --popover: #ffffff;
   --popover-foreground: #18181b;
-  --primary: #18181b;
-  --primary-foreground: #fafafa;
-  --brand: #18181b;
-  --brand-foreground: #fafafa;
-  --navy: #09090b;
-  --navy-foreground: #fafafa;
+  --primary: #1877f2;
+  --primary-foreground: #ffffff;
+  --brand: #1877f2;
+  --brand-foreground: #ffffff;
+  --navy: #1877f2;
+  --navy-foreground: #ffffff;
   --secondary: #f4f4f5;
   --secondary-foreground: #18181b;
   --muted: #f4f4f5;
@@ -87,8 +87,8 @@
   --warning-foreground: #ffffff;
   --border: #e4e4e7;
   --input: #e4e4e7;
-  --ring: #18181b;
-  --chart-1: #18181b;
+  --ring: #1877f2;
+  --chart-1: #1877f2;
   --chart-2: #52525b;
   --chart-3: #a1a1aa;
   --chart-4: #d4d4d8;
@@ -100,7 +100,7 @@
   --sidebar-accent: #f4f4f5;
   --sidebar-accent-foreground: #18181b;
   --sidebar-border: #e4e4e7;
-  --sidebar-ring: #18181b;
+  --sidebar-ring: #1877f2;
 }
 
 .dark {
@@ -110,12 +110,12 @@
   --card-foreground: #fafafa;
   --popover: #101012;
   --popover-foreground: #fafafa;
-  --primary: #fafafa;
-  --primary-foreground: #09090b;
-  --brand: #fafafa;
-  --brand-foreground: #09090b;
-  --navy: #101012;
-  --navy-foreground: #fafafa;
+  --primary: #1877f2;
+  --primary-foreground: #ffffff;
+  --brand: #1877f2;
+  --brand-foreground: #ffffff;
+  --navy: #1877f2;
+  --navy-foreground: #ffffff;
   --secondary: #1c1c1f;
   --secondary-foreground: #fafafa;
   --muted: #1c1c1f;
@@ -130,8 +130,8 @@
   --warning-foreground: #09090b;
   --border: rgb(255 255 255 / 0.1);
   --input: rgb(255 255 255 / 0.14);
-  --ring: #fafafa;
-  --chart-1: #fafafa;
+  --ring: #1877f2;
+  --chart-1: #1877f2;
   --chart-2: #a1a1aa;
   --chart-3: #71717a;
   --chart-4: #3f3f46;
@@ -229,10 +229,10 @@
   }
 }
 
-/* Deep navy band with a faint blue wash — used for hero + auth brand panels. */
+/* Facebook-blue band — used for hero + auth brand panels. */
 @utility hero-navy {
-  background-color: #09090b;
-  color: #fafafa;
+  background-color: #1877f2;
+  color: #ffffff;
 }
 
 /* Tabular figures for times, counts and metrics. */
