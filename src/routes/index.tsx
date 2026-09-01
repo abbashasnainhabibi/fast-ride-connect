@@ -173,7 +173,7 @@ function Landing() {
                   key={m.name}
                   className="inline-flex items-center gap-2 rounded-full border bg-muted/50 py-1 pl-1 pr-3 text-xs font-medium"
                 >
-                  <span className="grid size-6 place-items-center rounded-full bg-foreground text-[10px] font-semibold text-background">
+                  <span className="grid size-6 place-items-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">
                     {m.name.charAt(0)}
                   </span>
                   {m.name}
@@ -210,7 +210,7 @@ function Landing() {
                 <li key={m.name} className="flex items-center gap-2">
                   <span className="w-20 truncate text-xs text-muted-foreground">{m.name}</span>
                   <span className="h-1 flex-1 overflow-hidden rounded-full bg-muted">
-                    <span className="block h-full rounded-full bg-foreground" style={{ width: `${m.score}%` }} />
+                    <span className="block h-full rounded-full bg-primary" style={{ width: `${m.score}%` }} />
                   </span>
                   <span className="nums w-8 text-right text-xs font-semibold">{m.score}%</span>
                 </li>

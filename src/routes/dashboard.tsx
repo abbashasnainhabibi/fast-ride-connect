@@ -172,7 +172,7 @@ function DashboardPage() {
                   onClick={() => setWindow(t.value)}
                   className={`rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors duration-150 ease-out ${
                     window === t.value
-                      ? "border-foreground bg-foreground text-background"
+                      ? "border-primary bg-primary text-primary-foreground"
                       : "text-muted-foreground hover:border-foreground/40 hover:text-foreground"
                   }`}
                 >
