@@ -29,7 +29,7 @@ export function MatchCard({
   return (
     <article className="surface flex flex-col p-5 transition-all duration-150 ease-out hover:-translate-y-0.5 hover:shadow-lift">
       <div className="flex items-center gap-3">
-        <span className="grid size-10 shrink-0 place-items-center rounded-full bg-foreground font-display text-sm font-semibold text-background">
+        <span className="grid size-10 shrink-0 place-items-center rounded-full bg-primary font-display text-sm font-semibold text-primary-foreground">
           {match.name.charAt(0)}
         </span>
         <div className="min-w-0 flex-1">
@@ -49,7 +49,7 @@ export function MatchCard({
       <ol className="ml-1 mt-5 space-y-5 border-l pl-5">
         <li className="relative">
           <span
-            className="absolute -left-[26px] top-1.5 size-2 rounded-full bg-foreground"
+            className="absolute -left-[26px] top-1.5 size-2 rounded-full bg-primary"
             aria-hidden="true"
           />
           <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">

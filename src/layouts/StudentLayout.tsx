@@ -60,7 +60,7 @@ export function StudentLayout({
             <Link
               to="/dashboard"
               aria-label="FAST Carpool dashboard"
-              className="grid size-8 place-items-center rounded-lg bg-foreground text-xs font-bold text-background"
+              className="grid size-8 place-items-center rounded-lg bg-primary text-xs font-bold text-primary-foreground"
             >
               FC
             </Link>
