@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { Inbox } from "lucide-react";
 import { toast } from "sonner";
@@ -13,14 +14,7 @@ import { requestService } from "@/services/requestService";
 import { connectionService } from "@/services/connectionService";
 
 export const Route = createFileRoute("/requests")({
-  head: () => ({
-    meta: [
-      { title: "Carpool requests — FAST Carpool" },
-      { name: "description", content: "Track the carpool requests you have sent and respond to the ones you receive." },
-      { property: "og:title", content: "Carpool requests — FAST Carpool" },
-      { property: "og:description", content: "Accept, decline or cancel carpool requests in one place." },
-    ],
-  }),
+  head: () => pageMeta("Carpool requests — FAST Carpool", "Track the carpool requests you have sent and respond to the ones you receive.", "Accept, decline or cancel carpool requests in one place."),
   component: RequestsPage,
 });
 

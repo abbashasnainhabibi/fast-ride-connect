@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { CalendarDays, MapPin, Phone, Users } from "lucide-react";
 import { toast } from "sonner";
@@ -10,14 +11,7 @@ import { RIDE_TYPE_LABEL } from "@/mock/types";
 import { connectionService } from "@/services/connectionService";
 
 export const Route = createFileRoute("/connections")({
-  head: () => ({
-    meta: [
-      { title: "Your carpool connections — FAST Carpool" },
-      { name: "description", content: "Contact details for students you've connected with, unlocked after an accepted request." },
-      { property: "og:title", content: "Your carpool connections — FAST Carpool" },
-      { property: "og:description", content: "Coordinate rides with the students you're connected to." },
-    ],
-  }),
+  head: () => pageMeta("Your carpool connections — FAST Carpool", "Contact details for students you've connected with, unlocked after an accepted request.", "Coordinate rides with the students you're connected to."),
   component: ConnectionsPage,
 });
 

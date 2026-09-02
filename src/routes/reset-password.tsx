@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { AuthLayout } from "@/layouts/AuthLayout";
@@ -8,14 +9,7 @@ import { Label } from "@/components/ui/label";
 import { authService } from "@/services/authService";
 
 export const Route = createFileRoute("/reset-password")({
-  head: () => ({
-    meta: [
-      { title: "Reset password — FAST Carpool" },
-      { name: "description", content: "Choose a new password for your FAST Carpool student account." },
-      { property: "og:title", content: "Reset password — FAST Carpool" },
-      { property: "og:description", content: "Set a new password for your FAST Carpool account." },
-    ],
-  }),
+  head: () => pageMeta("Reset password — FAST Carpool", "Choose a new password for your FAST Carpool student account.", "Set a new password for your FAST Carpool account."),
   component: ResetPasswordPage,
 });
 

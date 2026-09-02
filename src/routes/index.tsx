@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { BadgeCheck, Eye, MapPin, PhoneOff, Search } from "lucide-react";
 import { PublicLayout } from "@/layouts/PublicLayout";
@@ -13,22 +14,7 @@ import {
 import { PICKUP_AREAS } from "@/mock/types";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "FAST Carpool — Find Your FAST Carpool" },
-      {
-        name: "description",
-        content:
-          "Connect with FAST students who live near you and have a similar university schedule. Verified students, timetable-based matching, privacy-first pickup areas.",
-      },
-      { property: "og:title", content: "FAST Carpool — Find Your FAST Carpool" },
-      {
-        property: "og:description",
-        content:
-          "Timetable-based carpool matching built for FAST students. Verified profiles and approximate pickup areas only.",
-      },
-    ],
-  }),
+  head: () => pageMeta("FAST Carpool — Find Your FAST Carpool", "Connect with FAST students who live near you and have a similar university schedule. Verified students, timetable-based matching, privacy-first pickup areas.", "Timetable-based carpool matching built for FAST students. Verified profiles and approximate pickup areas only."),
   component: Landing,
 });
 

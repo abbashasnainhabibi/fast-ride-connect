@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { GraduationCap } from "lucide-react";
 import { toast } from "sonner";
@@ -10,20 +11,7 @@ import { Label } from "@/components/ui/label";
 import { authService } from "@/services/authService";
 
 export const Route = createFileRoute("/signup")({
-  head: () => ({
-    meta: [
-      { title: "Create your FAST Carpool account" },
-      {
-        name: "description",
-        content: "Sign up with your FAST university email to start finding compatible carpool partners.",
-      },
-      { property: "og:title", content: "Create your FAST Carpool account" },
-      {
-        property: "og:description",
-        content: "Sign up with your FAST university email to find compatible carpool partners.",
-      },
-    ],
-  }),
+  head: () => pageMeta("Create your FAST Carpool account", "Sign up with your FAST university email to start finding compatible carpool partners.", "Sign up with your FAST university email to find compatible carpool partners."),
   component: SignupPage,
 });
 

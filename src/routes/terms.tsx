@@ -1,22 +1,9 @@
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { PublicLayout } from "@/layouts/PublicLayout";
 
 export const Route = createFileRoute("/terms")({
-  head: () => ({
-    meta: [
-      { title: "Terms of Use — FAST Carpool" },
-      {
-        name: "description",
-        content:
-          "The rules for using FAST Carpool: eligibility, respectful conduct, safety expectations and account moderation.",
-      },
-      { property: "og:title", content: "Terms of Use — FAST Carpool" },
-      {
-        property: "og:description",
-        content: "Eligibility, conduct, safety and moderation rules for FAST Carpool members.",
-      },
-    ],
-  }),
+  head: () => pageMeta("Terms of Use — FAST Carpool", "The rules for using FAST Carpool: eligibility, respectful conduct, safety expectations and account moderation.", "Eligibility, conduct, safety and moderation rules for FAST Carpool members."),
   component: TermsPage,
 });
 

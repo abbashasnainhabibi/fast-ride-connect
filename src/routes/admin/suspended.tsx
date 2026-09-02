@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { ShieldOff } from "lucide-react";
 import { toast } from "sonner";
@@ -9,14 +10,7 @@ import { useAsync } from "@/hooks/useAsync";
 import { adminService } from "@/services/adminService";
 
 export const Route = createFileRoute("/admin/suspended")({
-  head: () => ({
-    meta: [
-      { title: "Suspended accounts — FAST Carpool Admin" },
-      { name: "description", content: "Review suspended and banned student accounts and reinstate them if cleared." },
-      { property: "og:title", content: "Suspended accounts — FAST Carpool Admin" },
-      { property: "og:description", content: "Accounts currently removed from matching on FAST Carpool." },
-    ],
-  }),
+  head: () => pageMeta("Suspended accounts — FAST Carpool Admin", "Review suspended and banned student accounts and reinstate them if cleared.", "Accounts currently removed from matching on FAST Carpool."),
   component: AdminSuspended,
 });
 

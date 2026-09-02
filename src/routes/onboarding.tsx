@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Check, ChevronsUpDown, Info, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
@@ -29,14 +30,7 @@ import { profileService } from "@/services/profileService";
 import { authService } from "@/services/authService";
 
 export const Route = createFileRoute("/onboarding")({
-  head: () => ({
-    meta: [
-      { title: "Set up your carpool profile — FAST Carpool" },
-      { name: "description", content: "Tell us your ride type, preferences, approximate pickup area and phone number." },
-      { property: "og:title", content: "Set up your carpool profile — FAST Carpool" },
-      { property: "og:description", content: "A few quick steps to start matching with FAST students near you." },
-    ],
-  }),
+  head: () => pageMeta("Set up your carpool profile — FAST Carpool", "Tell us your ride type, preferences, approximate pickup area and phone number.", "A few quick steps to start matching with FAST students near you."),
   component: OnboardingPage,
 });
 
