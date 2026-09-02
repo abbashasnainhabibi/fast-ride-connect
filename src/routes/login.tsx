@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { GraduationCap, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
@@ -9,14 +10,7 @@ import { Label } from "@/components/ui/label";
 import { DEMO_CREDENTIALS, authService } from "@/services/authService";
 
 export const Route = createFileRoute("/login")({
-  head: () => ({
-    meta: [
-      { title: "Login — FAST Carpool" },
-      { name: "description", content: "Log in to FAST Carpool to see your matches, requests and connections." },
-      { property: "og:title", content: "Login — FAST Carpool" },
-      { property: "og:description", content: "Log in to see your carpool matches, requests and connections." },
-    ],
-  }),
+  head: () => pageMeta("Login — FAST Carpool", "Log in to FAST Carpool to see your matches, requests and connections.", "Log in to see your carpool matches, requests and connections."),
   component: LoginPage,
 });
 

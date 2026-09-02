@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AdminLayout } from "@/layouts/AdminLayout";
 import { ErrorState, LoadingState } from "@/components/States";
@@ -8,14 +9,7 @@ import { useAsync } from "@/hooks/useAsync";
 import { adminService } from "@/services/adminService";
 
 export const Route = createFileRoute("/admin/")({
-  head: () => ({
-    meta: [
-      { title: "Moderation overview — FAST Carpool Admin" },
-      { name: "description", content: "Platform stats, pending reports and recent moderation activity." },
-      { property: "og:title", content: "Moderation overview — FAST Carpool Admin" },
-      { property: "og:description", content: "Key numbers and recent actions across FAST Carpool." },
-    ],
-  }),
+  head: () => pageMeta("Moderation overview — FAST Carpool Admin", "Platform stats, pending reports and recent moderation activity.", "Key numbers and recent actions across FAST Carpool."),
   component: AdminHome,
 });
 

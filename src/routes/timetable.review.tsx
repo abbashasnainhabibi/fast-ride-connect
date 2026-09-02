@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { StudentLayout } from "@/layouts/StudentLayout";
@@ -9,14 +10,7 @@ import type { ClassSlot } from "@/mock/types";
 import { timetableService } from "@/services/timetableService";
 
 export const Route = createFileRoute("/timetable/review")({
-  head: () => ({
-    meta: [
-      { title: "Review your class timings — FAST Carpool" },
-      { name: "description", content: "Check and edit the class days and times we extracted from your timetable." },
-      { property: "og:title", content: "Review your class timings — FAST Carpool" },
-      { property: "og:description", content: "Confirm your weekly class timings before we find carpool matches." },
-    ],
-  }),
+  head: () => pageMeta("Review your class timings — FAST Carpool", "Check and edit the class days and times we extracted from your timetable.", "Confirm your weekly class timings before we find carpool matches."),
   component: ReviewPage,
 });
 

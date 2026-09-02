@@ -1,22 +1,9 @@
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { PublicLayout } from "@/layouts/PublicLayout";
 
 export const Route = createFileRoute("/privacy")({
-  head: () => ({
-    meta: [
-      { title: "Privacy Policy — FAST Carpool" },
-      {
-        name: "description",
-        content:
-          "How FAST Carpool handles university email verification, timetable data, approximate pickup areas and phone numbers.",
-      },
-      { property: "og:title", content: "Privacy Policy — FAST Carpool" },
-      {
-        property: "og:description",
-        content: "What we collect, what stays private, and how carpool matching data is used.",
-      },
-    ],
-  }),
+  head: () => pageMeta("Privacy Policy — FAST Carpool", "How FAST Carpool handles university email verification, timetable data, approximate pickup areas and phone numbers.", "What we collect, what stays private, and how carpool matching data is used."),
   component: PrivacyPage,
 });
 

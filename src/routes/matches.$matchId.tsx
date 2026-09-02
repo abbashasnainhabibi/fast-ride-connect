@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Lock, MapPin } from "lucide-react";
 import { toast } from "sonner";
@@ -14,14 +15,7 @@ import { matchService } from "@/services/matchService";
 import { requestService } from "@/services/requestService";
 
 export const Route = createFileRoute("/matches/$matchId")({
-  head: () => ({
-    meta: [
-      { title: "Match details — FAST Carpool" },
-      { name: "description", content: "See shared class days, pickup area and compatibility before sending a carpool request." },
-      { property: "og:title", content: "Match details — FAST Carpool" },
-      { property: "og:description", content: "Review timetable overlap and pickup area for this carpool match." },
-    ],
-  }),
+  head: () => pageMeta("Match details — FAST Carpool", "See shared class days, pickup area and compatibility before sending a carpool request.", "Review timetable overlap and pickup area for this carpool match."),
   component: MatchDetailPage,
 });
 

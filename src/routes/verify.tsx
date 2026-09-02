@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
@@ -9,14 +10,7 @@ import { Label } from "@/components/ui/label";
 import { authService } from "@/services/authService";
 
 export const Route = createFileRoute("/verify")({
-  head: () => ({
-    meta: [
-      { title: "Verify your FAST email — FAST Carpool" },
-      { name: "description", content: "Enter the 6-digit code sent to your FAST university email to verify your account." },
-      { property: "og:title", content: "Verify your FAST email — FAST Carpool" },
-      { property: "og:description", content: "Confirm your FAST university email with a 6-digit verification code." },
-    ],
-  }),
+  head: () => pageMeta("Verify your FAST email — FAST Carpool", "Enter the 6-digit code sent to your FAST university email to verify your account.", "Confirm your FAST university email with a 6-digit verification code."),
   component: VerifyPage,
 });
 

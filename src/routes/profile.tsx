@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { StudentLayout } from "@/layouts/StudentLayout";
@@ -25,14 +26,7 @@ import {
 import { profileService } from "@/services/profileService";
 
 export const Route = createFileRoute("/profile")({
-  head: () => ({
-    meta: [
-      { title: "Your profile — FAST Carpool" },
-      { name: "description", content: "Update your ride type, pickup area, partner preference and contact number." },
-      { property: "og:title", content: "Your profile — FAST Carpool" },
-      { property: "og:description", content: "Manage the details used to match you with other FAST students." },
-    ],
-  }),
+  head: () => pageMeta("Your profile — FAST Carpool", "Update your ride type, pickup area, partner preference and contact number.", "Manage the details used to match you with other FAST students."),
   component: ProfilePage,
 });
 

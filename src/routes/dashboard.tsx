@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { Search, Users } from "lucide-react";
 import { toast } from "sonner";
@@ -21,14 +22,7 @@ import { matchService } from "@/services/matchService";
 import { requestService } from "@/services/requestService";
 
 export const Route = createFileRoute("/dashboard")({
-  head: () => ({
-    meta: [
-      { title: "Your carpool matches — FAST Carpool" },
-      { name: "description", content: "Browse FAST students whose class timings and pickup area line up with yours." },
-      { property: "og:title", content: "Your carpool matches — FAST Carpool" },
-      { property: "og:description", content: "Compatible carpool partners ranked by timetable overlap and pickup area." },
-    ],
-  }),
+  head: () => pageMeta("Your carpool matches — FAST Carpool", "Browse FAST students whose class timings and pickup area line up with yours.", "Compatible carpool partners ranked by timetable overlap and pickup area."),
   component: DashboardPage,
 });
 

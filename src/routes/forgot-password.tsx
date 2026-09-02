@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { MailCheck } from "lucide-react";
 import { AuthLayout } from "@/layouts/AuthLayout";
@@ -8,17 +9,7 @@ import { Label } from "@/components/ui/label";
 import { authService } from "@/services/authService";
 
 export const Route = createFileRoute("/forgot-password")({
-  head: () => ({
-    meta: [
-      { title: "Forgot password — FAST Carpool" },
-      {
-        name: "description",
-        content: "Request a password reset link for your FAST Carpool account using your university email.",
-      },
-      { property: "og:title", content: "Forgot password — FAST Carpool" },
-      { property: "og:description", content: "Reset your FAST Carpool password with your university email." },
-    ],
-  }),
+  head: () => pageMeta("Forgot password — FAST Carpool", "Request a password reset link for your FAST Carpool account using your university email.", "Reset your FAST Carpool password with your university email."),
   component: ForgotPasswordPage,
 });
 

@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { FileWarning } from "lucide-react";
 import { toast } from "sonner";
@@ -24,14 +25,7 @@ import type { Report, ReportStatus } from "@/mock/types";
 import { adminService } from "@/services/adminService";
 
 export const Route = createFileRoute("/admin/reports")({
-  head: () => ({
-    meta: [
-      { title: "Reports queue — FAST Carpool Admin" },
-      { name: "description", content: "Review student reports, add moderation notes and resolve or dismiss cases." },
-      { property: "og:title", content: "Reports queue — FAST Carpool Admin" },
-      { property: "og:description", content: "Triage safety and behavior reports from FAST Carpool students." },
-    ],
-  }),
+  head: () => pageMeta("Reports queue — FAST Carpool Admin", "Review student reports, add moderation notes and resolve or dismiss cases.", "Triage safety and behavior reports from FAST Carpool students."),
   component: AdminReports,
 });
 

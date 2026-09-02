@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpDown, Search } from "lucide-react";
 import { toast } from "sonner";
@@ -31,14 +32,7 @@ import type { AccountStatus } from "@/mock/types";
 import { adminService } from "@/services/adminService";
 
 export const Route = createFileRoute("/admin/users")({
-  head: () => ({
-    meta: [
-      { title: "Manage students — FAST Carpool Admin" },
-      { name: "description", content: "Search FAST Carpool students and suspend, ban or reinstate accounts." },
-      { property: "og:title", content: "Manage students — FAST Carpool Admin" },
-      { property: "og:description", content: "Moderation controls for verified student accounts." },
-    ],
-  }),
+  head: () => pageMeta("Manage students — FAST Carpool Admin", "Search FAST Carpool students and suspend, ban or reinstate accounts.", "Moderation controls for verified student accounts."),
   component: AdminUsers,
 });
 

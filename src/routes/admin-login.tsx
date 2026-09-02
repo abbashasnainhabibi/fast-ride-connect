@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ShieldCheck } from "lucide-react";
 import { PublicLayout } from "@/layouts/PublicLayout";
@@ -8,14 +9,7 @@ import { Label } from "@/components/ui/label";
 import { DEMO_CREDENTIALS, authService } from "@/services/authService";
 
 export const Route = createFileRoute("/admin-login")({
-  head: () => ({
-    meta: [
-      { title: "Admin login — FAST Carpool" },
-      { name: "description", content: "Moderator sign-in for the FAST Carpool moderation console." },
-      { property: "og:title", content: "Admin login — FAST Carpool" },
-      { property: "og:description", content: "Restricted access for FAST Carpool moderators." },
-    ],
-  }),
+  head: () => pageMeta("Admin login — FAST Carpool", "Moderator sign-in for the FAST Carpool moderation console.", "Restricted access for FAST Carpool moderators."),
   component: AdminLoginPage,
 });
 

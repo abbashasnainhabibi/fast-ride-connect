@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AdminLayout } from "@/layouts/AdminLayout";
 import { ErrorState, LoadingState } from "@/components/States";
@@ -7,14 +8,7 @@ import { adminService } from "@/services/adminService";
 import { authService } from "@/services/authService";
 
 export const Route = createFileRoute("/admin/profile")({
-  head: () => ({
-    meta: [
-      { title: "Admin profile — FAST Carpool Admin" },
-      { name: "description", content: "Moderator account details and session controls for FAST Carpool." },
-      { property: "og:title", content: "Admin profile — FAST Carpool Admin" },
-      { property: "og:description", content: "Your moderator account details and last sign-in." },
-    ],
-  }),
+  head: () => pageMeta("Admin profile — FAST Carpool Admin", "Moderator account details and session controls for FAST Carpool.", "Your moderator account details and last sign-in."),
   component: AdminProfile,
 });
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pageMeta } from "@/lib/seo";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
@@ -12,14 +13,7 @@ import { profileService } from "@/services/profileService";
 import { authService } from "@/services/authService";
 
 export const Route = createFileRoute("/settings")({
-  head: () => ({
-    meta: [
-      { title: "Settings and privacy — FAST Carpool" },
-      { name: "description", content: "Manage privacy preferences, blocked students and your account session." },
-      { property: "og:title", content: "Settings and privacy — FAST Carpool" },
-      { property: "og:description", content: "Control what other students can see and manage blocked accounts." },
-    ],
-  }),
+  head: () => pageMeta("Settings and privacy — FAST Carpool", "Manage privacy preferences, blocked students and your account session.", "Control what other students can see and manage blocked accounts."),
   component: SettingsPage,
 });
 
