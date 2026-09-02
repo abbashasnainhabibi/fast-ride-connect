@@ -133,46 +133,45 @@ function ReportCard({ report, onChanged }: { report: Report; onChanged: () => vo
 }
 
 function AdminReports() {
-  const { data, error, loading, reload } = useAsync(() => adminService.getReports());
-  const reports = data ?? [];
+  const state = useAsync(() => adminService.getReports());
 
   return (
     <AdminLayout title="Reports" description="Every report raised by students, oldest status first.">
-      {loading ? <LoadingState label="Loading reports…" /> : null}
-      {error ? <ErrorState message={error} onRetry={reload} /> : null}
+      <AsyncSection state={state} loadingLabel="Loading reports…" isEmpty={() => false}>
+        {(reports) => (
+          <Tabs defaultValue="all">
+            <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1">
+              {FILTERS.map((f) => (
+                <TabsTrigger key={f.value} value={f.value}>
+                  {f.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
 
-      {!loading && !error ? (
-        <Tabs defaultValue="all">
-          <TabsList className="flex-wrap">
-            {FILTERS.map((f) => (
-              <TabsTrigger key={f.value} value={f.value}>
-                {f.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-
-          {FILTERS.map((f) => {
-            const list = f.value === "all" ? reports : reports.filter((r) => r.status === f.value);
-            return (
-              <TabsContent key={f.value} value={f.value} className="mt-5">
-                {list.length === 0 ? (
-                  <EmptyState
-                    title="Nothing here"
-                    description="No reports match this filter."
-                    icon={<FileWarning className="size-6" aria-hidden="true" />}
-                  />
-                ) : (
-                  <ul className="space-y-4">
-                    {list.map((r) => (
-                      <ReportCard key={r.id} report={r} onChanged={reload} />
-                    ))}
-                  </ul>
-                )}
-              </TabsContent>
-            );
-          })}
-        </Tabs>
-      ) : null}
+            {FILTERS.map((f) => {
+              const list = f.value === "all" ? reports : reports.filter((r) => r.status === f.value);
+              return (
+                <TabsContent key={f.value} value={f.value} className="mt-5">
+                  {list.length === 0 ? (
+                    <EmptyState
+                      title="Nothing here"
+                      description="No reports match this filter."
+                      icon={<FileWarning className="size-6" aria-hidden="true" />}
+                    />
+                  ) : (
+                    <ul className="space-y-4">
+                      {list.map((r) => (
+                        <ReportCard key={r.id} report={r} onChanged={state.reload} />
+                      ))}
+                    </ul>
+                  )}
+                </TabsContent>
+              );
+            })}
+          </Tabs>
+        )}
+      </AsyncSection>
     </AdminLayout>
   );
 }
+
