@@ -1,25 +1,15 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { pageMeta } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { FileWarning } from "lucide-react";
 import { toast } from "sonner";
 import { AdminLayout } from "@/layouts/AdminLayout";
-import { EmptyState, ErrorState, LoadingState } from "@/components/States";
+import { AsyncSection } from "@/components/AsyncSection";
+import { ConfirmAction } from "@/components/ConfirmAction";
 import { StatusPill } from "@/components/VerifiedBadge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { useAsync } from "@/hooks/useAsync";
 import type { Report, ReportStatus } from "@/mock/types";
 import { adminService } from "@/services/adminService";
@@ -36,36 +26,6 @@ const FILTERS: { value: "all" | ReportStatus; label: string }[] = [
   { value: "resolved", label: "Resolved" },
   { value: "dismissed", label: "Dismissed" },
 ];
-
-function ConfirmAction({
-  trigger,
-  title,
-  description,
-  confirmLabel,
-  onConfirm,
-}: {
-  trigger: ReactNode;
-  title: string;
-  description: string;
-  confirmLabel: string;
-  onConfirm: () => void;
-}) {
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>{description}</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm}>{confirmLabel}</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
-  );
-}
 
 function ReportCard({ report, onChanged }: { report: Report; onChanged: () => void }) {
   const [note, setNote] = useState("");
