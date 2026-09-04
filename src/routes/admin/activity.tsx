@@ -1,7 +1,7 @@
 import { pageMeta } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { AdminLayout } from "@/layouts/AdminLayout";
-import { EmptyState, ErrorState, LoadingState } from "@/components/States";
+import { AsyncSection } from "@/components/AsyncSection";
 import { useAsync } from "@/hooks/useAsync";
 import { adminService } from "@/services/adminService";
 
@@ -12,21 +12,19 @@ export const Route = createFileRoute("/admin/activity")({
 
 function AdminActivity() {
   const { data, error, loading, reload } = useAsync(() => adminService.getActivity());
-  const events = data ?? [];
 
   return (
     <AdminLayout title="Activity log" description="Every moderation action, newest first.">
-      {loading ? <LoadingState label="Loading activity…" /> : null}
-      {error ? <ErrorState message={error} onRetry={reload} /> : null}
-      {!loading && !error && events.length === 0 ? (
-        <EmptyState title="No activity yet" description="Moderation actions will be recorded here." />
-      ) : null}
-
-      {events.length > 0 ? (
+      <AsyncSection
+        state={{ data, error, loading, reload }}
+        loadingLabel="Loading activity…"
+        empty={{ title: "No activity yet", description: "Moderation actions will be recorded here." }}
+      >
+        {(events) => (
         <ol className="surface divide-y p-2">
           {events.map((a) => (
             <li key={a.id} className="flex flex-wrap items-center justify-between gap-2 px-4 py-3">
-              <div>
+              <div className="min-w-0">
                 <p className="text-sm font-medium">{a.action}</p>
                 <p className="text-sm text-muted-foreground">
                   {a.target} · by {a.admin}
@@ -36,7 +34,8 @@ function AdminActivity() {
             </li>
           ))}
         </ol>
-      ) : null}
+        )}
+      </AsyncSection>
     </AdminLayout>
   );
 }

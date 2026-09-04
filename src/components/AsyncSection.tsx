@@ -30,7 +30,7 @@ export function AsyncSection<T>({
   children: (data: T) => ReactNode;
 }) {
   if (state.loading) {
-    return <>{loadingFallback ?? <LoadingState label={loadingLabel} rows={loadingRows} />}</>;
+    return <>{loadingFallback ?? <LoadingState {...(loadingLabel ? { label: loadingLabel } : {})} {...(loadingRows ? { rows: loadingRows } : {})} />}</>;
   }
   if (state.error) return <ErrorState message={state.error} onRetry={state.reload} />;
   if (state.data == null) return null;

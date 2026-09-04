@@ -66,9 +66,7 @@ export function ConfirmAction({
             {confirmLabel ?? label ?? "Confirm"}
           </AlertDialogAction>
         </AlertDialogFooter>
-        </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-
   );
 }

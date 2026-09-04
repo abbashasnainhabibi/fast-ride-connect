@@ -4,7 +4,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Inbox } from "lucide-react";
 import { toast } from "sonner";
 import { StudentLayout } from "@/layouts/StudentLayout";
-import { EmptyState, ErrorState, LoadingState } from "@/components/States";
+import { EmptyState } from "@/components/States";
+import { AsyncSection } from "@/components/AsyncSection";
 import { StatusPill, VerifiedBadge } from "@/components/VerifiedBadge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -92,10 +93,8 @@ function RequestsPage() {
 
   return (
     <StudentLayout title="Requests" description="Carpool requests you've received and sent.">
-      {loading ? <LoadingState label="Loading requests…" /> : null}
-      {error ? <ErrorState message={error} onRetry={reload} /> : null}
-
-      {!loading && !error ? (
+      <AsyncSection state={{ data, error, loading, reload }} loadingLabel="Loading requests…" isEmpty={() => false}>
+        {() => (
         <Tabs defaultValue="received">
           <TabsList>
             <TabsTrigger value="received">Received ({received.length})</TabsTrigger>
@@ -134,7 +133,8 @@ function RequestsPage() {
             )}
           </TabsContent>
         </Tabs>
-      ) : null}
+        )}
+      </AsyncSection>
     </StudentLayout>
   );
 }
