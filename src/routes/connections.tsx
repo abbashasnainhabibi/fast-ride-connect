@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CalendarDays, MapPin, Phone, Users } from "lucide-react";
 import { toast } from "sonner";
 import { StudentLayout } from "@/layouts/StudentLayout";
-import { EmptyState, ErrorState, LoadingState } from "@/components/States";
+import { AsyncSection } from "@/components/AsyncSection";
 import { ReportBlockMenu } from "@/components/ReportBlockMenu";
 import { Button } from "@/components/ui/button";
 import { useAsync } from "@/hooks/useAsync";
@@ -17,7 +17,6 @@ export const Route = createFileRoute("/connections")({
 
 function ConnectionsPage() {
   const { data, error, loading, reload } = useAsync(() => connectionService.getConnections());
-  const connections = data ?? [];
 
   async function remove(id: string, name: string) {
     await connectionService.removeConnection(id);
@@ -30,16 +29,16 @@ function ConnectionsPage() {
       title="Connections"
       description="Contact details unlock only after both students agree to carpool."
     >
-      {loading ? <LoadingState label="Loading connections…" /> : null}
-      {error ? <ErrorState message={error} onRetry={reload} /> : null}
-      {!loading && !error && connections.length === 0 ? (
-        <EmptyState
-          title="No connections yet"
-          description="Accept a carpool request to unlock contact details and start coordinating."
-          icon={<Users className="size-6" aria-hidden="true" />}
-        />
-      ) : null}
-
+      <AsyncSection
+        state={{ data, error, loading, reload }}
+        loadingLabel="Loading connections…"
+        empty={{
+          title: "No connections yet",
+          description: "Accept a carpool request to unlock contact details and start coordinating.",
+          icon: <Users className="size-6" aria-hidden="true" />,
+        }}
+      >
+        {(connections) => (
       <ul className="grid gap-4 md:grid-cols-2">
         {connections.map((c) => (
           <li key={c.id} className="surface flex flex-col gap-3 p-5">
@@ -81,6 +80,8 @@ function ConnectionsPage() {
           </li>
         ))}
       </ul>
+        )}
+      </AsyncSection>
     </StudentLayout>
   );
 }
