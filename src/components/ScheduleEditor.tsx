@@ -93,7 +93,7 @@ export function ScheduleEditor({
                 </SelectContent>
               </Select>
             </div>
-            <div className="mt-3 flex min-w-0 flex-1 gap-2 sm:mt-0 sm:gap-3">
+            <div className="mt-3 flex min-w-0 flex-1 flex-col gap-2 min-[360px]:flex-row sm:mt-0 sm:gap-3">
               <div className="min-w-0 flex-1">
                 <Label htmlFor={`start-${slot.id}`} className="text-xs">
                   Start time
