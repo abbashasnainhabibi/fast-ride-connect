@@ -76,7 +76,7 @@ export function ScheduleEditor({
       <ul className="space-y-3">
         {slots.map((slot) => (
           <li key={slot.id} className="rounded-xl border bg-card p-3 sm:flex sm:items-end sm:gap-3">
-            <div className="min-w-40 flex-1">
+            <div className="min-w-0 flex-1 sm:min-w-40">
               <Label htmlFor={`day-${slot.id}`} className="text-xs">
                 Day
               </Label>
@@ -93,8 +93,8 @@ export function ScheduleEditor({
                 </SelectContent>
               </Select>
             </div>
-            <div className="mt-3 flex flex-1 gap-3 sm:mt-0">
-              <div className="flex-1">
+            <div className="mt-3 flex min-w-0 flex-1 gap-2 sm:mt-0 sm:gap-3">
+              <div className="min-w-0 flex-1">
                 <Label htmlFor={`start-${slot.id}`} className="text-xs">
                   Start time
                 </Label>
@@ -106,7 +106,7 @@ export function ScheduleEditor({
                   onChange={(e) => update(slot.id, { start: e.target.value })}
                 />
               </div>
-              <div className="flex-1">
+              <div className="min-w-0 flex-1">
                 <Label htmlFor={`end-${slot.id}`} className="text-xs">
                   End time
                 </Label>
@@ -134,7 +134,7 @@ export function ScheduleEditor({
       </ul>
 
       <div className="flex flex-wrap items-end gap-3 rounded-xl border border-dashed p-3">
-        <div className="min-w-40">
+        <div className="min-w-0 flex-1 sm:min-w-40 sm:flex-none">
           <Label htmlFor="add-day" className="text-xs">
             Add class time on
           </Label>

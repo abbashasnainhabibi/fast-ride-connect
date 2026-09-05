@@ -41,13 +41,13 @@ function ReviewPage() {
       description="Edit anything that looks off — matching uses only these days and times."
     >
       <div className="mx-auto max-w-2xl">
-        <div className="surface p-6">
+        <div className="surface p-4 sm:p-6">
           {slots === null ? (
             <LoadingState label="Loading your timetable…" />
           ) : (
             <>
               <ScheduleEditor slots={slots} onChange={setSlots} />
-              <div className="mt-6 flex justify-end gap-2">
+              <div className="mt-6 grid gap-2 sm:flex sm:justify-end">
                 <Button variant="outline" onClick={() => navigate({ to: "/timetable/upload" })}>
                   Re-upload
                 </Button>
