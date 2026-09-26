@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { pageMeta } from "@/lib/seo";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { TextField } from "@/components/Field";
@@ -15,12 +14,12 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
 });
 
-type Role = "passenger" | "driver" | "admin";
+type Role = "passenger" | "driver";
 
 const ROLES = [
   { value: "passenger", label: "Passenger" },
   { value: "driver", label: "Driver" },
-  { value: "admin", label: "Admin preview" },
+  
 ] as const satisfies readonly { value: Role; label: string }[];
 
 function LoginPage() {
@@ -47,7 +46,7 @@ function LoginPage() {
   }
 
   return (
-    <AuthLayout title="Log in to your account" subtitle="Use the FAST university email you signed up with.">
+    <AuthLayout title="Welcome back" subtitle="Log in with the FAST email you used when you joined.">
       <SegmentedControl
         label="Account type"
         value={role}
@@ -56,32 +55,7 @@ function LoginPage() {
         className="mb-4"
       />
 
-      {role === "admin" ? (
-        <div className="surface space-y-4 p-6">
-          <div className="flex items-start gap-3">
-            <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-muted text-muted-foreground">
-              <ShieldCheck className="size-4" aria-hidden="true" />
-            </span>
-            <div className="min-w-0">
-              <h2 className="text-sm font-semibold">Moderation console</h2>
-              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                Admin sign-in lives on a separate screen with its own credentials and audit log.
-              </p>
-            </div>
-          </div>
-          <Button asChild className="w-full">
-            <Link to="/admin-login">Continue to admin login</Link>
-          </Button>
-          <button
-            type="button"
-            onClick={() => setRole("passenger")}
-            className="w-full text-center text-xs font-medium text-muted-foreground transition-colors duration-150 ease-out hover:text-foreground"
-          >
-            ← Back to student login
-          </button>
-        </div>
-      ) : (
-        <div className="surface space-y-5 p-6">
+        <div className="space-y-5 border-t pt-6">
           <SsoBlock context="log in" />
 
           <form onSubmit={onSubmit} className="space-y-5" noValidate>
@@ -115,7 +89,7 @@ function LoginPage() {
               </p>
             ) : null}
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Logging in…" : `Log in as ${role === "driver" ? "driver" : "passenger"}`}
+              {loading ? "Logging in…" : "Log in"}
             </Button>
             <p className="break-words rounded-md border border-dashed bg-muted/60 px-3 py-2 text-xs text-muted-foreground">
               Demo login — {DEMO_CREDENTIALS.student.email} / {DEMO_CREDENTIALS.student.password}
@@ -128,7 +102,6 @@ function LoginPage() {
             </p>
           </form>
         </div>
-      )}
     </AuthLayout>
   );
 }

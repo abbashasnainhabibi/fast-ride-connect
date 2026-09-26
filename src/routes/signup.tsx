@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { pageMeta } from "@/lib/seo";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { GraduationCap } from "lucide-react";
 import { toast } from "sonner";
 import { AuthLayout } from "@/layouts/AuthLayout";
+import { PasswordField, TextField } from "@/components/Field";
+import { SegmentedControl } from "@/components/SegmentedControl";
+import { SsoBlock } from "@/components/SsoBlock";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { authService } from "@/services/authService";
 
 export const Route = createFileRoute("/signup")({
@@ -23,6 +23,11 @@ interface Errors {
 }
 
 type Role = "passenger" | "driver";
+
+const ROLES = [
+  { value: "passenger", label: "I need a ride" },
+  { value: "driver", label: "I can offer a ride" },
+] as const satisfies readonly { value: Role; label: string }[];
 
 function SignupPage() {
   const navigate = useNavigate();
@@ -69,126 +74,48 @@ function SignupPage() {
 
   return (
     <AuthLayout
-      title="Create your account"
-      subtitle="FAST Carpool is open only to students with a FAST university email."
+      title="Join FAST Carpool"
+      subtitle="Use your university email. We’ll check it before you set up your commute."
     >
-      <div
-        role="tablist"
-        aria-label="I will usually join as"
-        className="mb-4 grid grid-cols-2 gap-1 rounded-lg border bg-muted p-1"
-      >
-        {(["passenger", "driver"] as const).map((r) => (
-          <button
-            key={r}
-            role="tab"
-            aria-selected={role === r}
-            onClick={() => setRole(r)}
-            className={`rounded-md px-3 py-1.5 text-xs font-medium capitalize transition-colors duration-150 ease-out ${
-              role === r
-                ? "bg-background text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {r}
-          </button>
-        ))}
-      </div>
+      <SegmentedControl label="I usually carpool as" value={role} options={ROLES} onChange={setRole} className="mb-5" />
 
-      <div className="surface space-y-5 p-6">
-        <Button
-          type="button"
-          variant="outline"
-          className="w-full"
-          onClick={() =>
-            toast.info("FAST SSO is coming soon", {
-              description: "For now, sign up with your university email.",
-            })
-          }
-        >
-          <GraduationCap className="size-4" aria-hidden="true" />
-          Continue with FAST SSO
-        </Button>
-
-        <div className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-          <span className="h-px flex-1 bg-border" aria-hidden="true" />
-          or continue with email
-          <span className="h-px flex-1 bg-border" aria-hidden="true" />
-        </div>
+      <div className="space-y-5 border-t pt-6">
+        <SsoBlock context="sign up" />
 
         <form onSubmit={onSubmit} noValidate className="space-y-5">
-          <div>
-            <Label htmlFor="name">Full name</Label>
-            <Input
+          <TextField
               id="name"
-              className="mt-1"
+              label="Full name"
               autoComplete="name"
-              aria-invalid={!!errors.name}
-              aria-describedby={errors.name ? "name-error" : undefined}
+              {...(errors.name ? { error: errors.name } : {})}
               {...field("name")}
-            />
-            {errors.name ? (
-              <p id="name-error" className="mt-1 text-xs text-destructive">
-                {errors.name}
-              </p>
-            ) : null}
-          </div>
+          />
 
-          <div>
-            <Label htmlFor="email">FAST university email</Label>
-            <Input
+          <TextField
               id="email"
+              label="FAST university email"
               type="email"
-              className="mt-1"
               placeholder="k214512@nu.edu.pk"
               autoComplete="email"
-              aria-invalid={!!errors.email}
-              aria-describedby={errors.email ? "email-error" : undefined}
+              {...(errors.email ? { error: errors.email } : {})}
               {...field("email")}
-            />
-            {errors.email ? (
-              <p id="email-error" className="mt-1 text-xs text-destructive">
-                {errors.email}
-              </p>
-            ) : null}
-          </div>
+          />
 
-          <div>
-            <Label htmlFor="password">Password</Label>
-            <Input
+          <PasswordField
               id="password"
-              type="password"
-              className="mt-1"
+              label="Password"
               autoComplete="new-password"
-              aria-invalid={!!errors.password}
-              aria-describedby={errors.password ? "password-error" : undefined}
+              {...(errors.password ? { error: errors.password } : { hint: "Use at least 8 characters." })}
               {...field("password")}
-            />
-            {errors.password ? (
-              <p id="password-error" className="mt-1 text-xs text-destructive">
-                {errors.password}
-              </p>
-            ) : (
-              <p className="mt-1 text-xs text-muted-foreground">At least 8 characters.</p>
-            )}
-          </div>
+          />
 
-          <div>
-            <Label htmlFor="confirm">Confirm password</Label>
-            <Input
+          <PasswordField
               id="confirm"
-              type="password"
-              className="mt-1"
+              label="Confirm password"
               autoComplete="new-password"
-              aria-invalid={!!errors.confirm}
-              aria-describedby={errors.confirm ? "confirm-error" : undefined}
+              {...(errors.confirm ? { error: errors.confirm } : {})}
               {...field("confirm")}
-            />
-            {errors.confirm ? (
-              <p id="confirm-error" className="mt-1 text-xs text-destructive">
-                {errors.confirm}
-              </p>
-            ) : null}
-          </div>
+          />
 
           <div className="flex items-start gap-3 rounded-md border bg-muted/50 p-3">
             <Checkbox
@@ -206,7 +133,7 @@ function SignupPage() {
               <Link to="/privacy" className="font-medium text-foreground hover:underline">
                 Privacy Policy
               </Link>
-              , including how my timetable timings and approximate pickup area are used.
+               , including how my timetable timings and approximate pickup area are used.
             </Label>
           </div>
 
@@ -217,7 +144,7 @@ function SignupPage() {
           <p className="text-center text-sm text-muted-foreground">
             Already have an account?{" "}
             <Link to="/login" className="font-medium text-foreground hover:underline">
-              Login
+              Log in
             </Link>
           </p>
         </form>

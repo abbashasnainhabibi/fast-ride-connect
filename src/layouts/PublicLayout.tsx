@@ -17,7 +17,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
               <Link to="/login">Log in</Link>
             </Button>
             <Button asChild size="sm">
-              <Link to="/signup">Get started</Link>
+              <Link to="/signup">Join FAST Carpool</Link>
             </Button>
           </nav>
         </div>
@@ -27,7 +27,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
 
       <footer className="border-t bg-card">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-5 py-10 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs">Built for FAST students. Not an official FAST NUCES service.</p>
+          <p className="text-xs">Made for FAST students. Not an official FAST NUCES service.</p>
           <div className="flex flex-wrap gap-5 text-xs">
             <Link to="/login" className="transition-colors duration-150 ease-out hover:text-foreground">
               Log in
